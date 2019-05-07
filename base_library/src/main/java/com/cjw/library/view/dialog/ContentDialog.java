@@ -16,7 +16,7 @@ public class ContentDialog {
 	public static final class Builder {
 
 		private Context context;
-		private int height = 350, width = 550;
+		private int height = 450, width = 550;
 		private View view;
 		private TextView mTvTitle;
 		private TextView mTvContent;
