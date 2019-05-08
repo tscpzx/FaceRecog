@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/login_p"
+    android:paddingRight="@dimen/login_p"
+    tools:context=".ui.activity.LoginActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+        <!--app名-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/title_m_b"
+            android:text="@string/app_name"
+            android:textColor="@color/colorTheme"
+            android:textSize="34sp" />
+        <!--账号-->
+        <EditText
+            android:id="@+id/name"
+            style="@style/log_reg_editStyle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fifty_h"
+            android:drawableLeft="@mipmap/user"
+            android:hint="@string/name" />
+        <!--密码-->
+        <EditText
+            android:id="@+id/password"
+            style="@style/log_reg_editStyle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fifty_h"
+            android:layout_marginTop="@dimen/edit_btn_m_t"
+            android:drawableLeft="@mipmap/password"
+            android:hint="@string/password"
+            android:inputType="textPassword" />
+        <!--登录-->
+        <Button
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fifty_h"
+            android:layout_marginTop="@dimen/edit_btn_m_t"
+            android:background="@drawable/log_btn_shape"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:text="@string/login"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/normal_txt" />
+        <!--忘记密码-->
+        <TextView
+            android:id="@+id/forget_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/edit_btn_m_t"
+            android:text="@string/forget_password"
+            android:textSize="@dimen/normal_txt" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,11 +1,16 @@
 <resources>
 
-	<!-- Base application theme. -->
-	<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-		<!-- Customize your theme here. -->
-		<item name="colorPrimary">@color/colorPrimary</item>
-		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-		<item name="colorAccent">@color/colorAccent</item>
-	</style>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+    </style>
 
+    <style name="log_reg_editStyle">
+        <item name="android:background">@drawable/bg_edit</item>
+        <item name="android:drawablePadding">@dimen/edit_draw_p</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:paddingLeft">@dimen/edit_draw_p</item>
+        <item name="android:textCursorDrawable">@drawable/edit_txt_cursor</item>
+        <item name="android:textSize">@dimen/normal_txt</item>
+    </style>
 </resources>

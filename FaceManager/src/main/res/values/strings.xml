@@ -1,3 +1,15 @@
 <resources>
-	<string name="app_name">FaceRecog</string>
+    <string name="app_name">FaceRecog</string>
+    <string name="login">登录</string>
+    <string name="config_inter">配置网络</string>
+    <string name="name">用户名</string>
+    <string name="password">密码</string>
+    <string name="forget_password">忘记密码</string>
+
+    <dimen name="normal_txt">16sp</dimen>
+    <dimen name="title_m_b">80dp</dimen>
+    <dimen name="login_p">20dp</dimen>
+    <dimen name="fifty_h">50dp</dimen>
+    <dimen name="edit_draw_p">15dp</dimen>
+    <dimen name="edit_btn_m_t">35dp</dimen>
 </resources>
