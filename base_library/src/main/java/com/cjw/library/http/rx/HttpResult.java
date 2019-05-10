@@ -12,6 +12,6 @@ package com.cjw.library.http.rx;
  */
 public class HttpResult<T> {
     public int code;
-    public T result;
+    public T data;
     public String message;
 }

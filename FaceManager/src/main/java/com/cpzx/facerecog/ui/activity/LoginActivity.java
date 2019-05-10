@@ -7,12 +7,14 @@ import android.widget.EditText;
 
 import com.cpzx.facerecog.R;
 import com.cpzx.facerecog.presenter.LoginPresenter;
-import com.cpzx.facerecog.view.ILoginView;
+import com.cpzx.facerecog.presenter.impl.LoginPresenterImpl;
+import com.cpzx.facerecog.view.LoginView;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
-public class LoginActivity extends BaseActivity implements ILoginView, View.OnClickListener {
-    @BindView(R.id.name)
+public class LoginActivity extends BaseActivity implements LoginView {
+    @BindView(R.id.username)
     EditText nameEdit;
     @BindView(R.id.password)
     EditText passwordEdit;
@@ -23,36 +25,24 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setFullScreen();
         setContentView(R.layout.activity_login);
         init();
     }
 
     private void init() {
         initData();
-        setListen();
     }
 
     private void initData() {
-        this.mLoginPresenter = new LoginPresenter(this);
-    }
-
-    private void setListen() {
-        login.setOnClickListener(this);
-    }
-
-    @Override
-    public String getUserName() {
-        return nameEdit.getText().toString();
-    }
-
-    @Override
-    public String getPassword() {
-        return passwordEdit.getText().toString();
+        mLoginPresenter = new LoginPresenterImpl(this, this);
     }
 
     @Override
     public void onLoginSuccess() {
-        showToast("登录成功！");
+        goActivity(MainActivity.class);
+        finish();
+        showToast("登录成功");
     }
 
     @Override
@@ -60,18 +50,31 @@ public class LoginActivity extends BaseActivity implements ILoginView, View.OnCl
         showToast("登录失败！");
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.login:
-                mLoginPresenter.login();
-                break;
-        }
-    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         this.mLoginPresenter = null;
+    }
+
+    @OnClick({R.id.login})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.login:
+                login();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void login() {
+        String username = nameEdit.getText().toString();
+        String password = passwordEdit.getText().toString();
+        if (username.isEmpty() || password.isEmpty()) {
+            showToast("帐号密码不能为空");
+            return;
+        }
+        mLoginPresenter.login(username, password);
     }
 }
