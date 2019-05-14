@@ -1,153 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ui.activity.ConfigActivity">
 
-    <include
-        layout="@layout/common_title"
-         />
-    <!--网络设备-->
-    <LinearLayout style="@style/linear_layout"
-        android:layout_marginTop="20dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <TextView
-            style="@style/txt_layout"
-            android:text="网卡设备" />
+        <include layout="@layout/common_title" />
+        <!--网络设备-->
+        <LinearLayout style="@style/linear_layout">
 
-        <Spinner
-            android:id="@+id/equipment"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1"
-            android:dropDownVerticalOffset="20dp" />
-    </LinearLayout>
-    <!--连接类型-->
-    <LinearLayout style="@style/linear_layout">
+            <TextView
+                style="@style/txt_layout"
+                android:text="网卡设备" />
 
-        <TextView
-            style="@style/txt_layout"
-            android:text="连接类型" />
-
-        <RadioGroup
-            android:id="@+id/ip_type"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/dynamic_ip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="动态IP" />
-
-            <RadioButton
-                android:id="@+id/static_ip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <Spinner
+                android:id="@+id/equipment"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
-                android:checked="false"
-                android:text="静态IP" />
-        </RadioGroup>
+                android:layout_weight="4"
+                android:dropDownVerticalOffset="20dp" />
+        </LinearLayout>
+        <!--连接类型-->
+        <LinearLayout style="@style/linear_layout">
+
+            <TextView
+                style="@style/txt_layout"
+                android:text="连接类型" />
+
+            <RadioGroup
+                android:id="@+id/ip_type"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="4"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/dynamic_ip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="动态IP" />
+
+                <RadioButton
+                    android:id="@+id/static_ip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:checked="false"
+                    android:text="静态IP" />
+            </RadioGroup>
+        </LinearLayout>
+        <!--ip地址-->
+        <LinearLayout style="@style/linear_layout">
+
+            <TextView
+                style="@style/txt_layout"
+                android:text="ip地址" />
+
+            <EditText
+                android:id="@+id/ip_address"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="4"
+                android:background="@drawable/infor_input_edit"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:textSize="@dimen/normal_txt" />
+        </LinearLayout>
+        <!--子网掩码-->
+        <LinearLayout style="@style/linear_layout">
+
+            <TextView
+                style="@style/txt_layout"
+                android:text="子网掩码" />
+
+            <EditText
+                android:id="@+id/subnet_mask"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="4"
+                android:background="@drawable/infor_input_edit"
+                android:singleLine="true"
+                android:textSize="@dimen/normal_txt" />
+        </LinearLayout>
+        <!--DNS地址-->
+        <LinearLayout style="@style/linear_layout">
+
+            <TextView
+                style="@style/txt_layout"
+                android:text="DNS地址" />
+
+            <EditText
+                android:id="@+id/dns_address"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="4"
+                android:background="@drawable/infor_input_edit"
+                android:singleLine="true"
+                android:textSize="@dimen/normal_txt" />
+        </LinearLayout>
+        <!--网关地址-->
+        <LinearLayout style="@style/linear_layout">
+
+            <TextView
+                style="@style/txt_layout"
+                android:text="网关地址" />
+
+            <EditText
+                android:id="@+id/net_address"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="4"
+                android:background="@drawable/infor_input_edit"
+                android:singleLine="true"
+                android:textSize="@dimen/normal_txt" />
+        </LinearLayout>
     </LinearLayout>
-    <!--ip地址-->
-    <LinearLayout style="@style/linear_layout">
-
-        <TextView
-            style="@style/txt_layout"
-            android:text="ip地址" />
-
-        <EditText
-            android:id="@+id/ip_address"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:enabled="false"
-            android:singleLine="true"
-            android:textSize="@dimen/normal_txt" />
-    </LinearLayout>
-    <!--子网掩码-->
-    <LinearLayout style="@style/linear_layout">
-
-        <TextView
-            style="@style/txt_layout"
-            android:text="子网掩码" />
-
-        <EditText
-            android:id="@+id/subnet_mask"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:enabled="false"
-            android:singleLine="true"
-            android:textSize="@dimen/normal_txt" />
-    </LinearLayout>
-    <!--DNS地址-->
-    <LinearLayout style="@style/linear_layout">
-
-        <TextView
-            style="@style/txt_layout"
-            android:text="DNS地址" />
-
-        <EditText
-            android:id="@+id/dns_address"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:enabled="false"
-            android:singleLine="true"
-            android:textSize="@dimen/normal_txt" />
-    </LinearLayout>
-    <!--网关地址-->
-    <LinearLayout style="@style/linear_layout">
-
-        <TextView
-            style="@style/txt_layout"
-            android:text="网关地址" />
-
-        <EditText
-            android:id="@+id/net_address"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:enabled="false"
-            android:singleLine="true"
-            android:textSize="@dimen/normal_txt" />
-    </LinearLayout>
-
 
     <Button
-        android:id="@+id/confirm"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="15dp"
-        android:background="@color/colorTheme"
+        android:id="@+id/config"
+        style="@style/btn"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="20dp"
         android:text="确定"
-        android:textColor="@color/colorWhite"
-        android:textSize="16sp" />
+       />
 
     <ImageView
         android:id="@+id/code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone" />
-</LinearLayout>
+</RelativeLayout>

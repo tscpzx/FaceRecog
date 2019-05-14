@@ -2,8 +2,9 @@ package com.cpzx.facerecog.ui.activity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cpzx.facerecog.R;
@@ -11,38 +12,42 @@ import com.cpzx.facerecog.R;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class PersonManagerActivity extends BaseActivity {
-    @BindView(R.id.add_person)
-    Button add;
+public class AddPersonActivity extends BaseActivity {
     @BindView(R.id.title)
     TextView title;
+    @BindView(R.id.name)
+    EditText name;
+    @BindView(R.id.num)
+    EditText num;
+    @BindView(R.id.choose_pic)
+    LinearLayout choosePicture;
     @BindView(R.id.goBack)
     ImageView goback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_person_manager);
+        setContentView(R.layout.activity_add_person);
         init();
     }
 
     private void init() {
-        title.setText("人员管理");
+        title.setText("添加用户");
     }
 
-    @OnClick({R.id.add_person, R.id.goBack})
+
+    @OnClick({R.id.choose_pic, R.id.goBack})
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.choose_pic:
+
+                break;
             case R.id.goBack:
                 finish();
-                break;
-            case R.id.add_person:
-                goActivity(AddPersonActivity.class);
                 break;
             default:
                 break;
         }
-
-
     }
+
 }

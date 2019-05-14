@@ -1,6 +1,7 @@
 package com.cpzx.facerecog.ui.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -38,9 +39,8 @@ public class MainActivity extends BaseActivity {
                 if (position == 4) {
                     goActivity(ConfigActivity.class);
                 } else {
-                    if (sharedPreferenceUtil.getInt("loginUser") == 0) {
+                    if (null==sharedPreferenceUtil.getString("token")||sharedPreferenceUtil.getString("token").equals("")) {
                         goActivity(LoginActivity.class);
-                        return;
                     } else {
                         switch (position) {
                             case 0:

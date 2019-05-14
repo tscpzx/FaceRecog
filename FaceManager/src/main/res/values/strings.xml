@@ -5,6 +5,8 @@
     <string name="name">用户名</string>
     <string name="password">密码</string>
     <string name="forget_password">忘记密码</string>
+    <string name="add">添加</string>
+
     <dimen name="title_size">20dp</dimen>
     <dimen name="normal_txt">16sp</dimen>
     <dimen name="title_m_b">60dp</dimen>

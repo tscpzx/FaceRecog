@@ -20,14 +20,27 @@
         <item name="android:layout_marginBottom">2dip</item>
         <item name="android:background">@color/colorWhite</item>
         <item name="android:orientation">horizontal</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:paddingLeft">15dp</item>
     </style>
 
     <style name="txt_layout">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:textColor">@color/colorLightBlack</item>
         <item name="android:textSize">@dimen/normal_txt</item>
-        <item name="android:layout_marginLeft">@dimen/title_p_lr</item>
+    </style>
+
+    <style name="btn">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/fifty_h</item>
+        <item name="android:layout_marginTop">@dimen/edit_btn_m_t</item>
+        <item name="android:background">@drawable/log_btn_shape</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/normal_txt</item>
     </style>
 </resources>

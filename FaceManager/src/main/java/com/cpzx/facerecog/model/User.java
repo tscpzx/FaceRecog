@@ -4,18 +4,26 @@ package com.cpzx.facerecog.model;
  * created by xwr on 2019/5/10
  */
 public class User {
-    private int adminId;
+    private int admin_id;
     private int wid;
     private String name;
     private String password;
-    private String token;
+    private String access_cpfr_token;
 
-    public int getAdminId() {
-        return adminId;
+    public int getAdmin_id() {
+        return admin_id;
     }
 
-    public void setAdminId(int adminId) {
-        this.adminId = adminId;
+    public void setAdmin_id(int admin_id) {
+        this.admin_id = admin_id;
+    }
+
+    public String getAccess_cpfr_token() {
+        return access_cpfr_token;
+    }
+
+    public void setAccess_cpfr_token(String access_cpfr_token) {
+        this.access_cpfr_token = access_cpfr_token;
     }
 
     public int getWid() {
@@ -42,11 +50,4 @@ public class User {
         this.password = password;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
 }
