@@ -2,6 +2,8 @@ package com.cpzx.facerecog;
 
 
 import com.cjw.library.http.rx.HttpResult;
+import com.cpzx.facerecog.model.Device;
+import com.cpzx.facerecog.model.PageList;
 import com.cpzx.facerecog.model.User;
 import com.google.gson.JsonObject;
 
@@ -20,4 +22,10 @@ public interface HttpService {
   @FormUrlEncoded
   @POST("/cpfr/user/login")
   Observable<HttpResult<User>> login(@FieldMap Map<String, String> map);
+  @FormUrlEncoded
+  @POST("/cpfr/manager/add_person")
+  Observable<HttpResult<JsonObject>> addPerson(@FieldMap Map<String, String> map);
+  @FormUrlEncoded
+  @POST("/cpfr/device/list")
+  Observable<HttpResult<PageList<Device>>> deviceList(@FieldMap Map<String, String> map);
 }

@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/login_p"
     android:paddingRight="@dimen/login_p"
+    android:background="@color/white"
     tools:context=".ui.activity.LoginActivity">
 
     <!--app名-->
@@ -26,7 +27,7 @@
         android:orientation="vertical">
         <!--账号-->
         <EditText
-            android:id="@+id/username"
+            android:id="@+id/et_username"
             style="@style/log_reg_editStyle"
             android:layout_width="match_parent"
             android:layout_height="@dimen/fifty_h"
@@ -34,7 +35,7 @@
             android:hint="@string/name" />
         <!--密码-->
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/et_password"
             style="@style/log_reg_editStyle"
             android:layout_width="match_parent"
             android:layout_height="@dimen/fifty_h"
@@ -44,7 +45,7 @@
             android:inputType="textPassword" />
         <!--登录-->
         <Button
-            android:id="@+id/login"
+            android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="@dimen/fifty_h"
             android:layout_marginTop="@dimen/edit_btn_m_t"

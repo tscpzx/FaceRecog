@@ -6,9 +6,12 @@
     <string name="password">密码</string>
     <string name="forget_password">忘记密码</string>
     <string name="add">添加</string>
+    <string name="cancel">取消</string>
+    <string name="sure">确定</string>
 
-    <dimen name="title_size">20dp</dimen>
-    <dimen name="normal_txt">16sp</dimen>
+    <dimen name="title_size">24dp</dimen>
+    <dimen name="bigger_txt">20sp</dimen>
+    <dimen name="normal_txt">18sp</dimen>
     <dimen name="title_m_b">60dp</dimen>
     <dimen name="login_p">20dp</dimen>
     <dimen name="fifty_h">50dp</dimen>

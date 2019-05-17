@@ -12,6 +12,7 @@ import com.cpzx.facerecog.Constant;
 import com.cpzx.facerecog.HttpService;
 import com.cpzx.facerecog.model.User;
 import com.cpzx.facerecog.presenter.LoginPresenter;
+import com.cpzx.facerecog.util.HttpResultUtil;
 import com.cpzx.facerecog.util.SharedPreferenceUtil;
 import com.cpzx.facerecog.view.LoginView;
 
@@ -44,21 +45,19 @@ public class LoginPresenterImpl implements LoginPresenter {
                 .login(map)
                 .compose(RxSchedulers.<HttpResult<User>>defaultSchedulers())
                 .doOnSubscribe(new RxDoOnSubscribe(context))
-                .subscribe(new HttpResultSubscriber<User>(context) {
+                .subscribe(new HttpResultUtil<User>(context) {
                                @Override
                                public void _onSuccess(User result) {
-
                                    sharedPreferences.putValues(new SharedPreferenceUtil.ContentValue("adminId", result.getAdmin_id()));
                                    sharedPreferences.putValues(new SharedPreferenceUtil.ContentValue("token", result.getAccess_cpfr_token()));
-                                   Log.d("test",result.getAdmin_id()+"********");
                                    Constant.CURRENT_USER = result;
                                    isLogin = true;
                                    loginView.onLoginSuccess();
                                }
 
                                @Override
-                               public void _onError(Throwable e) {
-                                   super._onError(e);
+                               public void _onError(int code, Throwable e) {
+                                   super._onError(code, e);
                                    loginView.onLoginFail();
                                }
                            }

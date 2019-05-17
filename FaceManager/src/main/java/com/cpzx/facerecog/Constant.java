@@ -8,4 +8,8 @@ import com.cpzx.facerecog.model.User;
 public class Constant {
     public static User CURRENT_USER = new User();
     public static boolean isLogin = false;
+    public static final int TAKE_PHOTO = 0x00;
+    public static final int CHOOSE_PHOTO = 0x01;
+    public static final int CROP_PHOTO = 0x03;
+    public static final String IMAGE_FILE_NAME = "image.jpg";
 }

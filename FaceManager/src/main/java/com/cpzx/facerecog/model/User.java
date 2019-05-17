@@ -1,9 +1,11 @@
 package com.cpzx.facerecog.model;
 
+import java.io.Serializable;
+
 /**
  * created by xwr on 2019/5/10
  */
-public class User {
+public class User implements Serializable {
     private int admin_id;
     private int wid;
     private String name;

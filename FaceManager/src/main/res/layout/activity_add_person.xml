@@ -5,125 +5,193 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.AddPersonActivity">
 
-    <LinearLayout
+    <include
+        android:id="@+id/title"
+        layout="@layout/common_title" />
+
+    <com.cpzx.facerecog.widget.MyScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <include layout="@layout/common_title" />
-
-        <LinearLayout style="@style/linear_layout">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="*"
-                    android:textColor="@color/bg_red"
-                    android:textSize="@dimen/normal_txt" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="姓名："
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/normal_txt" />
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/name"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="4"
-                android:background="@drawable/infor_input_edit"
-                android:gravity="center_vertical"
-                android:singleLine="true"
-                android:textSize="@dimen/normal_txt" />
-        </LinearLayout>
-
-        <LinearLayout style="@style/linear_layout">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="*"
-                    android:textColor="@color/bg_red"
-                    android:textSize="@dimen/normal_txt" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="工号："
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/normal_txt" />
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/num"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="4"
-                android:background="@drawable/infor_input_edit"
-                android:gravity="center_vertical"
-                android:singleLine="true"
-                android:textSize="@dimen/normal_txt" />
-        </LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_add"
+        android:layout_below="@+id/title">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:padding="15dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="图片："
-                android:textColor="@color/black"
-                android:textSize="@dimen/normal_txt" />
+            <LinearLayout style="@style/linear_layout">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="*"
+                        android:textColor="@color/bg_red"
+                        android:textSize="@dimen/normal_txt" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="姓名："
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/normal_txt" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/et_name"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/infor_input_edit"
+                    android:gravity="center_vertical|right"
+                    android:hint="请输入姓名"
+                    android:singleLine="true"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/normal_txt" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/linear_layout">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="*"
+                        android:textColor="@color/bg_red"
+                        android:textSize="@dimen/normal_txt"
+                        android:visibility="invisible" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="工号："
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/normal_txt" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/et_num"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/infor_input_edit"
+                    android:gravity="center_vertical|right"
+                    android:singleLine="true"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/normal_txt" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/linear_layout">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="*"
+                        android:textColor="@color/bg_red"
+                        android:textSize="@dimen/normal_txt"
+                        android:visibility="invisible" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="授权设备:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/normal_txt" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_device_num"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/infor_input_edit"
+                    android:clickable="true"
+                    android:drawableEnd="@mipmap/enter"
+                    android:focusable="true"
+                    android:gravity="right|center_vertical"
+                    android:singleLine="true"
+                    android:text="请选择"
+                    android:textColor="@color/tip_txt_color"
+                    android:textSize="@dimen/normal_txt" />
+            </LinearLayout>
+
+
 
             <LinearLayout
-                android:id="@+id/choose_pic"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/choose_img_shape"
-                android:clickable="true"
-                android:gravity="center">
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+"
-                    android:textColor="@color/bg_grey"
-                    android:textSize="42sp" />
+                    android:text="图片："
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/normal_txt" />
+
+                <ImageView
+                    android:id="@+id/iv_header"
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/choose_img_shape"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:scaleType="fitXY"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/ll_choose_pic"
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/choose_img_shape"
+                    android:clickable="true"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+"
+                        android:textColor="@color/bg_grey"
+                        android:textSize="42sp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </com.cpzx.facerecog.widget.MyScrollView>
 
     <Button
-        android:id="@+id/add"
+        android:id="@+id/btn_add"
         style="@style/btn"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="15dp"

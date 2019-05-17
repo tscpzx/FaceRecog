@@ -1,13 +1,12 @@
 package com.cpzx.facerecog.ui.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.cpzx.facerecog.R;
-import com.cpzx.facerecog.adapter.GridAdapter;
+import com.cpzx.facerecog.adapter.FunctionGridAdapter;
 import com.cpzx.facerecog.util.SharedPreferenceUtil;
 
 import butterknife.BindView;
@@ -15,7 +14,7 @@ import butterknife.BindView;
 public class MainActivity extends BaseActivity {
     @BindView(R.id.grid_view)
     GridView mGridView;
-    private GridAdapter mGridAdapter;
+    private FunctionGridAdapter mFunctionGridAdapter;
     private SharedPreferenceUtil sharedPreferenceUtil;
 
     @Override
@@ -31,8 +30,8 @@ public class MainActivity extends BaseActivity {
 
     private void initData() {
         sharedPreferenceUtil = SharedPreferenceUtil.getInstance(this);
-        mGridAdapter = new GridAdapter(this);
-        mGridView.setAdapter(mGridAdapter);
+        mFunctionGridAdapter = new FunctionGridAdapter(this);
+        mGridView.setAdapter(mFunctionGridAdapter);
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

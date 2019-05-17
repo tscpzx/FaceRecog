@@ -1,6 +1,7 @@
 package com.cpzx.facerecog.ui.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,18 +15,17 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity implements LoginView {
-    @BindView(R.id.username)
-    EditText nameEdit;
-    @BindView(R.id.password)
-    EditText passwordEdit;
-    @BindView(R.id.login)
-    Button login;
+    @BindView(R.id.et_username)
+    EditText etUserName;
+    @BindView(R.id.et_password)
+    EditText etPassword;
+    @BindView(R.id.btn_login)
+    Button btnLogin;
     private LoginPresenter mLoginPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setFullScreen();
         setContentView(R.layout.activity_login);
         init();
     }
@@ -40,14 +40,13 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
     @Override
     public void onLoginSuccess() {
-        goActivity(MainActivity.class);
         finish();
         showToast("登录成功");
     }
 
     @Override
     public void onLoginFail() {
-        showToast("登录失败！");
+        Log.d("Login","登录失败!");
     }
 
 
@@ -57,10 +56,10 @@ public class LoginActivity extends BaseActivity implements LoginView {
         this.mLoginPresenter = null;
     }
 
-    @OnClick({R.id.login})
+    @OnClick({R.id.btn_login})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.login:
+            case R.id.btn_login:
                 login();
                 break;
             default:
@@ -69,8 +68,8 @@ public class LoginActivity extends BaseActivity implements LoginView {
     }
 
     private void login() {
-        String username = nameEdit.getText().toString();
-        String password = passwordEdit.getText().toString();
+        String username = etUserName.getText().toString();
+        String password = etPassword.getText().toString();
         if (username.isEmpty() || password.isEmpty()) {
             showToast("帐号密码不能为空");
             return;

@@ -1,11 +1,10 @@
 package com.cjw.library.http.rx;
 
-import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.cjw.library.view.dialog.LoadingDialog;
-import com.cjw.library.view.dialog.TipDialog;
 
 import retrofit2.adapter.rxjava.HttpException;
 import rx.Subscriber;
@@ -36,7 +35,7 @@ public abstract class HttpResultSubscriber<T> extends Subscriber<HttpResult<T>> 
         if (e instanceof HttpException) {
             // ToastUtils.getInstance().showToast(e.getMessage());
         }
-        _onError(e);
+        _onError(-1, e);
     }
 
     @Override
@@ -45,20 +44,23 @@ public abstract class HttpResultSubscriber<T> extends Subscriber<HttpResult<T>> 
         if (t.code == 0) {
             _onSuccess(t.data);
         } else {
-            _onError(new Throwable("error: " + t.message));
+            _onError(t.code, new Throwable("error: " + t.message));
         }
     }
 
     public abstract void _onSuccess(T t);
 
-    public void _onError(final Throwable e) {
+    public void _onError(int code, final Throwable e) {
         LoadingDialog.close();
-        String message = e.getMessage();
-        if (TextUtils.isEmpty(message)) {
-            message = "连接超时";
+        if (code != 102)  {
+            String message = e.getMessage();
+            if (TextUtils.isEmpty(message)) {
+                message = "连接超时";
+            }
+            if (mContext != null) //TipDialog.show((Activity) mContext, message);
+                Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         }
-        if (mContext != null) TipDialog.show((Activity) mContext, message);
-            //Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
-        e.printStackTrace();
+
     }
 }

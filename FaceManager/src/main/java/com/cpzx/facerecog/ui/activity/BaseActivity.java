@@ -80,4 +80,12 @@ public class BaseActivity extends AppCompatActivity {
         Intent intent = new Intent(this, activity);
         startActivity(intent);
     }
+
+    /**
+     * TODO:刷新当前activity
+     */
+    public void refresh() {
+        onCreate(null);
+    }
+
 }

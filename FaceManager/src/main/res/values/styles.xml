@@ -17,7 +17,7 @@
     <style name="linear_layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">50dp</item>
-        <item name="android:layout_marginBottom">2dip</item>
+        <item name="android:layout_marginBottom">2px</item>
         <item name="android:background">@color/colorWhite</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:paddingRight">15dp</item>
@@ -25,8 +25,7 @@
     </style>
 
     <style name="txt_layout">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:textColor">@color/colorLightBlack</item>
@@ -42,5 +41,26 @@
         <item name="android:minWidth">0dp</item>
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:textSize">@dimen/normal_txt</item>
+    </style>
+
+    <style name="DialogTheme" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 模糊 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 遮罩层 -->
+        <item name="android:backgroundDimAmount">0.5</item>
+    </style>
+
+    <!-- dialog的动画 -->
+    <style name="main_menu_animStyle">
+        <item name="android:windowEnterAnimation">@anim/dialog_in_anim</item>
+        <item name="android:windowExitAnimation">@anim/dialog_out_anim</item>
     </style>
 </resources>

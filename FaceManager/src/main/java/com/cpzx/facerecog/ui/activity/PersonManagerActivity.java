@@ -1,5 +1,6 @@
 package com.cpzx.facerecog.ui.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,9 +15,9 @@ import butterknife.OnClick;
 public class PersonManagerActivity extends BaseActivity {
     @BindView(R.id.add_person)
     Button add;
-    @BindView(R.id.title)
+    @BindView(R.id.tv_title)
     TextView title;
-    @BindView(R.id.goBack)
+    @BindView(R.id.iv_go_back)
     ImageView goback;
 
     @Override
@@ -30,10 +31,10 @@ public class PersonManagerActivity extends BaseActivity {
         title.setText("人员管理");
     }
 
-    @OnClick({R.id.add_person, R.id.goBack})
+    @OnClick({R.id.add_person, R.id.iv_go_back})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.goBack:
+            case R.id.iv_go_back:
                 finish();
                 break;
             case R.id.add_person:
