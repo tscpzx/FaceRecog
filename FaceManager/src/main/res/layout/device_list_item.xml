@@ -1,33 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/fifty_h"
+    android:background="@color/white"
+    android:minHeight="50dp"
     android:paddingLeft="@dimen/title_p_lr"
     android:paddingRight="@dimen/title_p_lr">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tv_device_name"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/colorLightBlack"
+        android:textSize="@dimen/normal_txt" />
 
-
-        <TextView
-            android:id="@+id/tv_device_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorLightBlack"
-            android:textSize="@dimen/normal_txt" />
-
-        <TextView
-            android:id="@+id/tv_device_sn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:textColor="@color/colorLightBlack"
-            android:textSize="@dimen/normal_txt" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_device_sn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toLeftOf="@+id/checkbox"
+        android:layout_toRightOf="@+id/tv_device_name"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/window_bg_grey"
+        android:textSize="@dimen/small_txt"
+        tools:ignore="UnknownId" />
 
     <CheckBox
         android:id="@+id/cb_choose"
@@ -36,5 +42,6 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:focusable="false"
-        android:focusableInTouchMode="false" />
+        android:focusableInTouchMode="false"
+        app:theme="@style/cb_style" />
 </RelativeLayout>

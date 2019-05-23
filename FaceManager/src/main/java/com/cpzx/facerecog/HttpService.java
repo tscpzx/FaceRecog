@@ -12,20 +12,24 @@ import java.util.Map;
 
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import rx.Observable;
 
 public interface HttpService {
-  @FormUrlEncoded
-  @POST("/cpfr/app/device_list")
-  Observable<HttpResult<List<JsonObject>>> device_list(@FieldMap Map<String, String> map);
-  @FormUrlEncoded
-  @POST("/cpfr/user/login")
-  Observable<HttpResult<User>> login(@FieldMap Map<String, String> map);
-  @FormUrlEncoded
-  @POST("/cpfr/manager/add_person")
-  Observable<HttpResult<JsonObject>> addPerson(@FieldMap Map<String, String> map);
-  @FormUrlEncoded
-  @POST("/cpfr/device/list")
-  Observable<HttpResult<PageList<Device>>> deviceList(@FieldMap Map<String, String> map);
+    @FormUrlEncoded
+    @POST("/cpfr/app/device_list")
+    Observable<HttpResult<List<JsonObject>>> device_list(@FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
+    @POST("/cpfr/user/login")
+    Observable<HttpResult<User>> login(@FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
+    @POST("/cpfr/manager/add_person")
+    Observable<HttpResult<User>> addPerson(@Header("access_cpfr_token") String token, @FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
+    @POST("/cpfr/device/list")
+    Observable<HttpResult<PageList<Device>>> deviceList(@Header("access_cpfr_token") String token,@FieldMap Map<String, String> map);
 }

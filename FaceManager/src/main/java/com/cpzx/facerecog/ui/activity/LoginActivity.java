@@ -46,7 +46,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
 
     @Override
     public void onLoginFail() {
-        Log.d("Login","登录失败!");
+        Log.d("Login", "登录失败!");
     }
 
 
@@ -71,7 +71,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         String username = etUserName.getText().toString();
         String password = etPassword.getText().toString();
         if (username.isEmpty() || password.isEmpty()) {
-            showToast("帐号密码不能为空");
+            showToast("帐号或密码不能为空");
             return;
         }
         mLoginPresenter.login(username, password);

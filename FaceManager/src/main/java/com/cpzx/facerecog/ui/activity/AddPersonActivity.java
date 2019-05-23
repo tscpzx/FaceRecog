@@ -1,34 +1,29 @@
 package com.cpzx.facerecog.ui.activity;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cpzx.facerecog.R;
-import com.cpzx.facerecog.adapter.DeviceListAdapter;
 import com.cpzx.facerecog.model.Device;
 import com.cpzx.facerecog.model.Person;
 import com.cpzx.facerecog.presenter.AddPersonPresenter;
 import com.cpzx.facerecog.presenter.impl.AddPersonPresenterImpl;
+import com.cpzx.facerecog.util.ImageUtil;
+import com.cpzx.facerecog.util.StringUtil;
 import com.cpzx.facerecog.view.AddPersonView;
+import com.cpzx.facerecog.widget.GetPictureDialog;
+import com.cpzx.facerecog.widget.ListDialog;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -62,6 +57,8 @@ public class AddPersonActivity extends BaseActivity implements AddPersonView {
     TextView tvDeviceNum;
     private AddPersonPresenter mAddPersonPresenter;
     private List<Device> mDeviceList = new ArrayList<>();
+    private String chooseDeviceIds = "";
+    private byte[] headBytes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,13 +82,13 @@ public class AddPersonActivity extends BaseActivity implements AddPersonView {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_choose_pic:
-                showDialog();
+                showGetPhotoDialog();
                 break;
             case R.id.iv_go_back:
                 finish();
                 break;
             case R.id.iv_header:
-                showDialog();
+                showGetPhotoDialog();
                 break;
             case R.id.btn_add:
                 addPerson();
@@ -110,33 +107,42 @@ public class AddPersonActivity extends BaseActivity implements AddPersonView {
         } else if (ivHeader.getDrawable() == null) {
             showToast("请上传头像");
         } else {
-            Person person = new Person(etName.getText().toString(), etNum.getText().toString(), ((BitmapDrawable) (ivHeader).getDrawable()).getBitmap());
+            Person person = new Person(etName.getText().toString(), etNum.getText().toString(), headBytes, chooseDeviceIds);
             mAddPersonPresenter.addPerson(person);
         }
     }
 
     private void showDeviceDialog() {
-        AlertDialog.Builder builder;
-        // 动态加载一个listview的布局文件进来
-        LayoutInflater inflater = LayoutInflater.from(AddPersonActivity.this);
-        View view = inflater.inflate(R.layout.dialog_device_lsit, null);
-
-        // 给ListView绑定内容
-        ListView listview = (ListView) view.findViewById(R.id.lv_device_list);
-        DeviceListAdapter adapter = new DeviceListAdapter(this, mDeviceList);
-        // 给listview加入适配器
-        listview.setAdapter(adapter);
-        listview.setItemsCanFocus(false);
-        listview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-
-        builder = new AlertDialog.Builder(this);
-        //设置加载的listview
-        builder.setView(view);
-        builder.create().show();
+        if (mDeviceList.size() == 0) {
+            showToast("暂无数据");
+        } else {
+            ListDialog listDialog = new ListDialog(this, mDeviceList, this, new ListDialog.GetClickedDevices() {
+                @Override
+                public void getDevices(List<Integer> devicesIds) {
+                    List<Integer> list = devicesIds;
+                    tvDeviceNum.setText("已选择：" + list.size() + "台设备");
+                    String ids = StringUtil.listToString(list, ',');
+                    chooseDeviceIds = ids;
+                    Log.d("test", chooseDeviceIds);
+                }
+            });
+            listDialog.show();
+        }
 
     }
 
-    private void showDialog() {
+    private void showGetPhotoDialog() {
+        new GetPictureDialog(this) {
+            @Override
+            public void takePhoto() {
+                mAddPersonPresenter.getPhoto(TAKE_PHOTO);
+            }
+
+            @Override
+            public void choosePic() {
+                mAddPersonPresenter.getPhoto(CHOOSE_PHOTO);
+            }
+        }.show();
     }
 
 
@@ -153,9 +159,9 @@ public class AddPersonActivity extends BaseActivity implements AddPersonView {
     @Override
     public void onAddSuccess() {
         showToast("添加成功");
-        refresh();
+        finish();
+        goActivity(AddPersonActivity.class);
     }
-
 
     @Override
     public void onAddFail() {
@@ -193,14 +199,21 @@ public class AddPersonActivity extends BaseActivity implements AddPersonView {
         }
     }
 
-    // 设置图片
     private void setImage(Intent intent) {
         Bundle extra = intent.getExtras();
         if (extra != null) {
             Bitmap bitmap = extra.getParcelable("data");
-            ivHeader.setImageBitmap(bitmap);
-            ivHeader.setVisibility(View.VISIBLE);
-            llChoosePicture.setVisibility(View.GONE);
+            byte[] bytes = ImageUtil.BitmapToBytes(bitmap);
+            if (bitmap != null) {
+                ivHeader.setImageBitmap(bitmap);
+                ivHeader.setVisibility(View.VISIBLE);
+                llChoosePicture.setVisibility(View.GONE);
+                headBytes = ImageUtil.compressImageByBytes(bytes);
+            } else {
+                showToast("未获取到图片");
+            }
+        } else {
+            showToast("照片获取失败,请稍后再试");
         }
     }
 
@@ -209,14 +222,18 @@ public class AddPersonActivity extends BaseActivity implements AddPersonView {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
         intent.putExtra("crop", true);
-        // 裁剪框的比例
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
-        // 裁剪出图片的大小
         intent.putExtra("outputX", 100);
         intent.putExtra("outputY", 100);
         intent.putExtra("return-data", true);
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());// 图片格式
         startActivityForResult(intent, CROP_PHOTO);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAddPersonPresenter.getDeviceList();
+    }
 }

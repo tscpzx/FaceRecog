@@ -6,54 +6,54 @@ import java.io.Serializable;
  * created by xwr on 2019/5/17
  */
 public class Device implements Serializable {
-    private int deviceId;
-    private String deviceName;
-    private String deviceSn;
-    private String lastOnlineTime;//最近上线时间
-    private String activateTime;//激活时间
+    private int device_id;
+    private String device_name;
+    private String device_sn;
+    private String last_online_time;//最近上线时间
+    private String activate_time;//激活时间
     private int online;//0：不在线;1：在线
-    private String registerTime;//注册时间
-    private String lastOffineTime;//最近下线时间
+    private String register_time;//注册时间
+    private String last_offline_time;//最近下线时间
     private boolean isCheck;//是否选中
 
-    public int getDeviceId() {
-        return deviceId;
+    public int getDevice_id() {
+        return device_id;
     }
 
-    public void setDeviceId(int deviceId) {
-        this.deviceId = deviceId;
+    public void setDevice_id(int device_id) {
+        this.device_id = device_id;
     }
 
-    public String getDeviceName() {
-        return deviceName;
+    public String getDevice_name() {
+        return device_name;
     }
 
-    public void setDeviceName(String deviceName) {
-        this.deviceName = deviceName;
+    public void setDevice_name(String device_name) {
+        this.device_name = device_name;
     }
 
-    public String getDeviceSn() {
-        return deviceSn;
+    public String getDevice_sn() {
+        return device_sn;
     }
 
-    public void setDeviceSn(String deviceSn) {
-        this.deviceSn = deviceSn;
+    public void setDevice_sn(String device_sn) {
+        this.device_sn = device_sn;
     }
 
-    public String getLastOnlineTime() {
-        return lastOnlineTime;
+    public String getLast_online_time() {
+        return last_online_time;
     }
 
-    public void setLastOnlineTime(String lastOnlineTime) {
-        this.lastOnlineTime = lastOnlineTime;
+    public void setLast_online_time(String last_online_time) {
+        this.last_online_time = last_online_time;
     }
 
-    public String getActivateTime() {
-        return activateTime;
+    public String getActivate_time() {
+        return activate_time;
     }
 
-    public void setActivateTime(String activateTime) {
-        this.activateTime = activateTime;
+    public void setActivate_time(String activate_time) {
+        this.activate_time = activate_time;
     }
 
     public int getOnline() {
@@ -64,20 +64,20 @@ public class Device implements Serializable {
         this.online = online;
     }
 
-    public String getRegisterTime() {
-        return registerTime;
+    public String getRegister_time() {
+        return register_time;
     }
 
-    public void setRegisterTime(String registerTime) {
-        this.registerTime = registerTime;
+    public void setRegister_time(String register_time) {
+        this.register_time = register_time;
     }
 
-    public String getLastOffineTime() {
-        return lastOffineTime;
+    public String getLast_offline_time() {
+        return last_offline_time;
     }
 
-    public void setLastOffineTime(String lastOffineTime) {
-        this.lastOffineTime = lastOffineTime;
+    public void setLast_offline_time(String last_offline_time) {
+        this.last_offline_time = last_offline_time;
     }
 
     public boolean isCheck() {

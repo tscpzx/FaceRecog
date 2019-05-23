@@ -12,35 +12,46 @@ public class Person implements Serializable {
 
     private String emp_number;//工号
 
-    private Bitmap header;//头像
+    private byte[] header;//头像
 
-    public Person(String name, String num, Bitmap header) {
+    private String deviceIds;
+
+    public Person(String name, String num, byte[] header, String deviceIds) {
         this.person_name = name;
         this.emp_number = num;
         this.header = header;
+        this.deviceIds = deviceIds;
     }
 
-    public String getName() {
+    public String getPerson_name() {
         return person_name;
     }
 
-    public void setName(String name) {
-        this.person_name = name;
+    public void setPerson_name(String person_name) {
+        this.person_name = person_name;
     }
 
-    public String getNum() {
+    public String getEmp_number() {
         return emp_number;
     }
 
-    public void setNum(String num) {
-        this.emp_number = num;
+    public void setEmp_number(String emp_number) {
+        this.emp_number = emp_number;
     }
 
-    public Bitmap getHeader() {
+    public byte[] getHeader() {
         return header;
     }
 
-    public void setHeader(Bitmap header) {
+    public void setHeader(byte[] header) {
         this.header = header;
+    }
+
+    public String getDeviceIds() {
+        return deviceIds;
+    }
+
+    public void setDeviceIds(String deviceIds) {
+        this.deviceIds = deviceIds;
     }
 }

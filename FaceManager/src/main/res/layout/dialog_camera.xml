@@ -16,21 +16,23 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dip"
+        android:layout_height="1px"
         android:background="@android:color/darker_gray" />
 
-    <TextView
-        android:id="@+id/tv_take_pic"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="相册"
-        android:textColor="@android:color/background_dark"
-        android:textSize="@dimen/normal_txt" />
+
+
+        <TextView
+            android:id="@+id/tv_take_pic"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="相册"
+            android:gravity="center"
+            android:textColor="@android:color/background_dark"
+            android:textSize="@dimen/normal_txt" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="5dip"
+        android:layout_height="5px"
         android:background="@android:color/darker_gray" />
 
     <TextView

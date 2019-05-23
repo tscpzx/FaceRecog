@@ -1,7 +1,6 @@
 package com.cpzx.facerecog.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,7 @@ import android.widget.TextView;
 import com.cpzx.facerecog.R;
 import com.cpzx.facerecog.model.Device;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -23,15 +23,19 @@ import butterknife.ButterKnife;
 public class DeviceListAdapter extends BaseAdapter {
     private Context context;
     private List<Device> deviceList;
+    private List<Integer> checkBoxIdList;
+
 
     public DeviceListAdapter(Context context, List<Device> deviceList) {
         this.context = context;
         this.deviceList = deviceList;
+        checkBoxIdList = new ArrayList<>();
     }
 
     @Override
     public int getCount() {
-        return  deviceList.size();
+
+        return deviceList.size();
     }
 
     @Override
@@ -45,44 +49,61 @@ public class DeviceListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView( int position, View convertView, ViewGroup parent) {
-         ViewHolder viewHolder;
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.device_list_item, null);
-            viewHolder = new ViewHolder(convertView);
-            convertView.setTag(viewHolder);
+            holder = new ViewHolder(convertView);
+            convertView.setTag(holder);
         } else {
-            viewHolder = (ViewHolder) convertView.getTag();
+            holder = (ViewHolder) convertView.getTag();
         }
-        Log.d("test",deviceList.get(position).getDeviceName());
-        viewHolder.tvDeviceName.setText(deviceList.get(position).getDeviceName());
-        viewHolder.tvDeviceSn.setText(deviceList.get(position).getDeviceSn());
-        viewHolder.cbChoose.setChecked(deviceList.get(position).isCheck());
-//        convertView.setOnClickListener(new View.OnClickListener() {
+        holder.tvDeviceName.setText(deviceList.get(position).getDevice_name());
+        holder.tvDeviceSn.setText(deviceList.get(position).getDevice_sn());
+        holder.cbChoose.setChecked(deviceList.get(position).isCheck());
+        final int pos = position;
+        final boolean isChecked = deviceList.get(pos).isCheck();
+        holder.cbChoose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deviceList.get(pos).setCheck(!isChecked);
+            }
+        });
+//        holder.cbChoose.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 //            @Override
-//            public void onClick(View v) {
-//                CheckBox checkBox = viewHolder.cbChoose;
-//                if (checkBox.isChecked()) {
-//                    checkBox.setChecked(false);
-//                    deviceList.get(position).setCheck(false);
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                deviceList.get(position).setCheck(isChecked);
+//                if (isChecked) {
+//                    checkBoxIdList.add(deviceList.get(position).getDevice_id());
 //                } else {
-//                    checkBox.setChecked(true);
-//                    deviceList.get(position).setCheck(true);
+//                    //checkBoxIdList.remove(deviceList.get(position).getDevice_id());
 //                }
 //            }
 //        });
+
         return convertView;
     }
 
-    class ViewHolder {
+
+    static class ViewHolder {
         @BindView(R.id.tv_device_name)
         TextView tvDeviceName;
         @BindView(R.id.tv_device_sn)
         TextView tvDeviceSn;
         @BindView(R.id.cb_choose)
         CheckBox cbChoose;
+
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
+    }
+
+    public List<Integer> getCheckBoxIdList() {
+        for (Device device : deviceList) {
+            if (device.isCheck()) {
+                checkBoxIdList.add(device.getDevice_id());
+            }
+        }
+        return checkBoxIdList;
     }
 }

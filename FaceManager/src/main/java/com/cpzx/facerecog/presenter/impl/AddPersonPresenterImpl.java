@@ -8,7 +8,6 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 import com.cjw.library.http.rx.HttpResult;
-import com.cjw.library.http.rx.HttpResultSubscriber;
 import com.cjw.library.http.rx.RxDoOnSubscribe;
 import com.cjw.library.http.rx.RxSchedulers;
 import com.cjw.library.http.rx.RxTrHttpMethod;
@@ -22,11 +21,9 @@ import com.cpzx.facerecog.util.HttpResultUtil;
 import com.cpzx.facerecog.util.ImageUtil;
 import com.cpzx.facerecog.util.SharedPreferenceUtil;
 import com.cpzx.facerecog.view.AddPersonView;
-import com.google.gson.JsonObject;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static com.cpzx.facerecog.Constant.CHOOSE_PHOTO;
@@ -49,12 +46,13 @@ public class AddPersonPresenterImpl implements AddPersonPresenter {
 
     @Override
     public void getPhoto(int code) {
-        if (code == TAKE_PHOTO) {//拍照
+        if (code == TAKE_PHOTO) {
             //启动相机
             Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");// 设置action
             intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory(), IMAGE_FILE_NAME)));
             addPersonView.takePhoto(intent, TAKE_PHOTO);
         } else {
+            //打开相册
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
             addPersonView.choosePhoto(intent, CHOOSE_PHOTO);
@@ -64,12 +62,10 @@ public class AddPersonPresenterImpl implements AddPersonPresenter {
 
     @Override
     public void getDeviceList() {
-        String token = sharedPreferenceUtil.getString("token");
         Map<String, String> map = new HashMap<>();
-        map.put("access_cpfr_token", token);
         RxTrHttpMethod.getInstance()
                 .createService(HttpService.class)
-                .deviceList(map)
+                .deviceList(sharedPreferenceUtil.getString("token"), map)
                 .compose(RxSchedulers.<HttpResult<PageList<Device>>>defaultSchedulers())
                 .doOnSubscribe(new RxDoOnSubscribe(context))
                 .subscribe(new HttpResultUtil<PageList<Device>>(context) {
@@ -90,17 +86,18 @@ public class AddPersonPresenterImpl implements AddPersonPresenter {
     @Override
     public void addPerson(Person person) {
         Map<String, String> map = new HashMap<>();
-        map.put("person_name", person.getName());
-        map.put("emp_number", person.getNum());
-        map.put("file", ImageUtil.bitmapToBase64(person.getHeader()));
+        map.put("person_name", person.getPerson_name());
+        map.put("emp_number", person.getEmp_number());
+        map.put("device_ids", person.getDeviceIds());
+        map.put("file", ImageUtil.bytesToBase64(person.getHeader()));
         RxTrHttpMethod.getInstance()
                 .createService(HttpService.class)
-                .addPerson(map)
-                .compose(RxSchedulers.<HttpResult<JsonObject>>defaultSchedulers())
+                .addPerson(sharedPreferenceUtil.getString("token"), map)
+                .compose(RxSchedulers.<HttpResult<User>>defaultSchedulers())
                 .doOnSubscribe(new RxDoOnSubscribe(context))
-                .subscribe(new HttpResultUtil<JsonObject>(context) {
+                .subscribe(new HttpResultUtil<User>(context) {
                                @Override
-                               public void _onSuccess(JsonObject result) {
+                               public void _onSuccess(User result) {
                                    addPersonView.onAddSuccess();
                                }
 

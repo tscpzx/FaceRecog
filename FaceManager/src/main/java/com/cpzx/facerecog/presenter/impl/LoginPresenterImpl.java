@@ -50,7 +50,6 @@ public class LoginPresenterImpl implements LoginPresenter {
                                public void _onSuccess(User result) {
                                    sharedPreferences.putValues(new SharedPreferenceUtil.ContentValue("adminId", result.getAdmin_id()));
                                    sharedPreferences.putValues(new SharedPreferenceUtil.ContentValue("token", result.getAccess_cpfr_token()));
-                                   Constant.CURRENT_USER = result;
                                    isLogin = true;
                                    loginView.onLoginSuccess();
                                }

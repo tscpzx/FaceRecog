@@ -5,8 +5,10 @@
 	<color name="colorAccent">#D81B60</color>
 	<color name="colorTheme">#63BBD0</color>
 	<color name="colorRed">#ff5454</color>
+	<color name="colorLightRed">#eea6a6</color>
 	<color name="colorWhite">#ffffff</color>
 	<color name="colorLightBlack">#222222</color>
 	<color name="colorGrey">#787878</color>
 	<color name="tip_txt_color">#a49e9e</color>
+	<color name="colorLightGrey">#eeeeee</color>
 </resources>

@@ -12,6 +12,7 @@
     <dimen name="title_size">24dp</dimen>
     <dimen name="bigger_txt">20sp</dimen>
     <dimen name="normal_txt">18sp</dimen>
+    <dimen name="small_txt">16sp</dimen>
     <dimen name="title_m_b">60dp</dimen>
     <dimen name="login_p">20dp</dimen>
     <dimen name="fifty_h">50dp</dimen>
