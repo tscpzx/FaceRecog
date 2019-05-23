@@ -23,12 +23,12 @@ public class ImageUtil {
      */
     public static byte[] compressImageByBytes(byte[] bytes) {
         BitmapFactory.Options newOpts = new BitmapFactory.Options();
-        newOpts.inJustDecodeBounds = true;
+        newOpts.inJustDecodeBounds = true;//解码时只返回bitmap尺寸
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, newOpts);
         int w = newOpts.outWidth;
         int h = newOpts.outHeight;
-        float hh = 800f;//
-        float ww = 480f;//
+        float hh = 800f;
+        float ww = 480f;
         int be = 1;
         if (w > h && w > ww) {
             be = (int) (newOpts.outWidth / ww);
@@ -39,7 +39,7 @@ public class ImageUtil {
             be = 1;
         newOpts.inSampleSize = be;//设置采样率
         newOpts.inJustDecodeBounds = false;
-        newOpts.inPreferredConfig = Bitmap.Config.ARGB_8888;//该模式是默认的,可不设
+        newOpts.inPreferredConfig = Bitmap.Config.ARGB_8888;//色彩模式
         newOpts.inPurgeable = true;// 同时设置才会有效
         newOpts.inInputShareable = true;//。当系统内存不够时候图片自动被回收
         bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, newOpts);
