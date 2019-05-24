@@ -8,7 +8,13 @@
     <string name="add">添加</string>
     <string name="cancel">取消</string>
     <string name="sure">确定</string>
-
+    <string name="input_tip">请输入wifi名称</string>
+    <string name="input_type">请输入wifi加密类型：WPA、WEP、OPEN</string>
+    <string name="search">wifi扫描</string>
+    <string name="input_password">请输入wifi密码</string>
+    <string name="buildQr">生成二维码</string>
+    <string name="wifiConfig">wifi配置</string>
+    <string name="ethConfig">以太网配置</string>
     <dimen name="title_size">24dp</dimen>
     <dimen name="bigger_txt">20sp</dimen>
     <dimen name="normal_txt">18sp</dimen>

@@ -36,9 +36,10 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 4) {
-                    goActivity(ConfigActivity.class);
+                    goActivity(WiFiConfigActivity.class);
                 } else {
-                    if (null==sharedPreferenceUtil.getString("token")||sharedPreferenceUtil.getString("token").equals("")) {
+                    if (null == sharedPreferenceUtil.getString("token") || sharedPreferenceUtil.getString("token").equals("")) {
+                        showToast("请先登录~");
                         goActivity(LoginActivity.class);
                     } else {
                         switch (position) {
