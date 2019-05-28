@@ -10,6 +10,10 @@ import com.cpzx.facerecog.R;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+/**
+ * @author xwr
+ * @date 2019/5/28
+ */
 public class AttendManagerActivity extends BaseActivity {
     @BindView(R.id.tv_title)
     TextView tvTitle;

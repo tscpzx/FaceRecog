@@ -15,7 +15,8 @@ import com.cpzx.facerecog.R;
 import butterknife.ButterKnife;
 
 /**
- * created by xwr on 2019/5/8
+ * @author xwr
+ * @date 2019/5/28
  */
 public class BaseActivity extends AppCompatActivity {
     @Override

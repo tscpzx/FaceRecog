@@ -1,6 +1,5 @@
 package com.cpzx.facerecog.ui.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +11,10 @@ import com.cpzx.facerecog.R;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+/**
+ * @author xwr
+ * @date 2019/5/28
+ */
 public class PersonManagerActivity extends BaseActivity {
     @BindView(R.id.add_person)
     Button add;

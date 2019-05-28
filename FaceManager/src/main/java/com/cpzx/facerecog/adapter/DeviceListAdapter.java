@@ -69,18 +69,6 @@ public class DeviceListAdapter extends BaseAdapter {
                 deviceList.get(pos).setCheck(!isChecked);
             }
         });
-//        holder.cbChoose.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                deviceList.get(position).setCheck(isChecked);
-//                if (isChecked) {
-//                    checkBoxIdList.add(deviceList.get(position).getDevice_id());
-//                } else {
-//                    //checkBoxIdList.remove(deviceList.get(position).getDevice_id());
-//                }
-//            }
-//        });
-
         return convertView;
     }
 

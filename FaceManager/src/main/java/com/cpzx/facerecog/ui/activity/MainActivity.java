@@ -1,11 +1,6 @@
 package com.cpzx.facerecog.ui.activity;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.StrictMode;
-import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -16,6 +11,10 @@ import com.cpzx.facerecog.util.SharedPreferenceUtil;
 
 import butterknife.BindView;
 
+/**
+ * @author xwr
+ * @date 2019/5/28
+ */
 public class MainActivity extends BaseActivity {
     @BindView(R.id.grid_view)
     GridView mGridView;
@@ -29,7 +28,6 @@ public class MainActivity extends BaseActivity {
         init();
 
     }
-
 
 
     private void init() {

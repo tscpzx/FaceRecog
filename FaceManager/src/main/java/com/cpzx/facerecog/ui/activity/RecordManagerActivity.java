@@ -1,6 +1,5 @@
 package com.cpzx.facerecog.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,6 +10,10 @@ import com.cpzx.facerecog.R;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+/**
+ * @author xwr
+ * @date 2019/5/28
+ */
 public class RecordManagerActivity extends BaseActivity {
 
     @BindView(R.id.tv_title)

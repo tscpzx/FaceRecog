@@ -12,6 +12,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * @author xwr
+ * @date 2019/5/28
+ */
 public class ConfigActivity extends BaseActivity {
 
     @BindView(R.id.iv_go_back)

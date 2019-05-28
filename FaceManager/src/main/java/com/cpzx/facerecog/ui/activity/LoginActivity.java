@@ -14,6 +14,10 @@ import com.cpzx.facerecog.view.LoginView;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+/**
+ * @author xwr
+ * @date 2019/5/28
+ */
 public class LoginActivity extends BaseActivity implements LoginView {
     @BindView(R.id.et_username)
     EditText etUserName;
