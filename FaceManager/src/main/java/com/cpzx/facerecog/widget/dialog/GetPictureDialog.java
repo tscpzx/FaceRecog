@@ -1,4 +1,4 @@
-package com.cpzx.facerecog.widget;
+package com.cpzx.facerecog.widget.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;

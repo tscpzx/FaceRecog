@@ -29,8 +29,8 @@ import com.cpzx.facerecog.presenter.impl.AddPersonPresenterImpl;
 import com.cpzx.facerecog.util.ImageUtil;
 import com.cpzx.facerecog.util.StringUtil;
 import com.cpzx.facerecog.view.AddPersonView;
-import com.cpzx.facerecog.widget.GetPictureDialog;
-import com.cpzx.facerecog.widget.ListDialog;
+import com.cpzx.facerecog.widget.dialog.GetPictureDialog;
+import com.cpzx.facerecog.widget.dialog.ListDialog;
 
 import java.io.File;
 import java.util.ArrayList;
