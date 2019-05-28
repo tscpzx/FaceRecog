@@ -24,6 +24,7 @@ import com.cpzx.facerecog.util.SharedPreferenceUtil;
 import com.cpzx.facerecog.view.AddPersonView;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,6 +50,14 @@ public class AddPersonPresenterImpl implements AddPersonPresenter {
     public void getPhoto(int code) {
         if (code == TAKE_PHOTO) {
             File cameraSavePath = new File(Environment.getExternalStorageDirectory(), IMAGE_FILE_NAME);
+            try {
+                if (cameraSavePath.exists()) {
+                    cameraSavePath.delete();
+                }
+                cameraSavePath.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             Uri uri;
             //启动相机
             Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");// 设置action

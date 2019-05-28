@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -46,6 +47,7 @@ import static com.cpzx.facerecog.Constant.TAKE_PHOTO;
 
 public class AddPersonActivity extends BaseActivity implements AddPersonView {
     private final String TAG = AddPersonActivity.class.getSimpleName();
+    private Handler mHandler;
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.et_name)
@@ -264,9 +266,4 @@ public class AddPersonActivity extends BaseActivity implements AddPersonView {
         startActivityForResult(intent, CROP_PHOTO);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mAddPersonPresenter.getDeviceList();
-    }
 }
