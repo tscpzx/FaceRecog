@@ -23,4 +23,15 @@
         android:textColor="@color/white"
         android:textSize="@dimen/bigger_txt" />
 
+    <TextView
+        android:id="@+id/tv_r"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:clickable="true"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/normal_txt"
+        android:visibility="gone" />
+
 </RelativeLayout>

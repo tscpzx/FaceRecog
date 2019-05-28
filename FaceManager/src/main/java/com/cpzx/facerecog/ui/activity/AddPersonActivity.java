@@ -1,11 +1,18 @@
 package com.cpzx.facerecog.ui.activity;
 
+import android.Manifest;
+import android.content.ClipData;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -59,6 +66,7 @@ public class AddPersonActivity extends BaseActivity implements AddPersonView {
     private List<Device> mDeviceList = new ArrayList<>();
     private String chooseDeviceIds = "";
     private byte[] headBytes;
+    private Uri uritempFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +77,7 @@ public class AddPersonActivity extends BaseActivity implements AddPersonView {
 
     private void init() {
         initData();
+
     }
 
     private void initData() {
@@ -82,7 +91,7 @@ public class AddPersonActivity extends BaseActivity implements AddPersonView {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_choose_pic:
-                showGetPhotoDialog();
+                request();
                 break;
             case R.id.iv_go_back:
                 finish();
@@ -130,6 +139,23 @@ public class AddPersonActivity extends BaseActivity implements AddPersonView {
         }
 
     }
+
+    protected void request() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//版本判断
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, 1);
+            } else {
+                showGetPhotoDialog();
+            }
+        }
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            builder.detectFileUriExposure();
+        }
+    }
+
 
     private void showGetPhotoDialog() {
         new GetPictureDialog(this) {
@@ -189,8 +215,6 @@ public class AddPersonActivity extends BaseActivity implements AddPersonView {
             if (resultCode == RESULT_OK) {
                 File file = new File(Environment.getExternalStorageDirectory(), IMAGE_FILE_NAME);
                 cropPhoto(Uri.fromFile(file));
-            } else {
-                showToast("未找到存储卡");
             }
         } else if (requestCode == CROP_PHOTO) {
             if (data != null) {
@@ -203,19 +227,16 @@ public class AddPersonActivity extends BaseActivity implements AddPersonView {
         Bundle extra = intent.getExtras();
         if (extra != null) {
             Bitmap bitmap = extra.getParcelable("data");
-            byte[] bytes = ImageUtil.BitmapToBytes(bitmap);
-            if (bitmap != null) {
-                ivHeader.setImageBitmap(bitmap);
-                ivHeader.setVisibility(View.VISIBLE);
-                llChoosePicture.setVisibility(View.GONE);
-                headBytes = ImageUtil.compressImageByBytes(bytes);
-            } else {
-                showToast("未获取到图片");
-            }
+            byte[] bytes = ImageUtil.BitmapToBytes(bitmap, 100);
+            ivHeader.setImageBitmap(bitmap);
+            ivHeader.setVisibility(View.VISIBLE);
+            llChoosePicture.setVisibility(View.GONE);
+            headBytes = ImageUtil.compressImageByBytes(bytes);
         } else {
             showToast("照片获取失败,请稍后再试");
         }
     }
+
 
     // 裁剪
     private void cropPhoto(Uri uri) {
@@ -226,6 +247,16 @@ public class AddPersonActivity extends BaseActivity implements AddPersonView {
         intent.putExtra("aspectY", 1);
         intent.putExtra("outputX", 100);
         intent.putExtra("outputY", 100);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            //开启临时权限
+            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            //重点:针对7.0以上的操作
+            intent.setClipData(ClipData.newRawUri(MediaStore.EXTRA_OUTPUT, uri));
+            uritempFile = uri;
+        } else {
+            uritempFile = Uri.parse("file://" + "/" + Environment.getExternalStorageDirectory().getPath() + "/" + "small.jpg");
+        }
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uritempFile);
         intent.putExtra("return-data", true);
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());// 图片格式
         startActivityForResult(intent, CROP_PHOTO);

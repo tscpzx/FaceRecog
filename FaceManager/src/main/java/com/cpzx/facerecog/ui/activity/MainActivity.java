@@ -1,6 +1,11 @@
 package com.cpzx.facerecog.ui.activity;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -22,7 +27,10 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+
     }
+
+
 
     private void init() {
         initData();
@@ -36,7 +44,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (position == 4) {
-                    goActivity(WiFiConfigActivity.class);
+                    goActivity(ConfigActivity.class);
                 } else {
                     if (null == sharedPreferenceUtil.getString("token") || sharedPreferenceUtil.getString("token").equals("")) {
                         showToast("请先登录~");

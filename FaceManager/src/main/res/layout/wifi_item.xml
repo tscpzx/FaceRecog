@@ -2,14 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:background="@color/colorWhite"
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/fifty_h"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/m_p">
 
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:textSize="20sp" />
+        android:textSize="@dimen/normal_txt" />
 
     <TextView
         android:id="@+id/capability"
@@ -17,5 +21,5 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:gravity="center_vertical"
-        android:textSize="20sp" />
+        android:textSize="@dimen/normal_txt" />
 </LinearLayout>

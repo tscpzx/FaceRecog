@@ -3,9 +3,10 @@ package com.cpzx.facerecog.presenter.impl;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
+import android.support.v4.content.FileProvider;
 
 import com.cjw.library.http.rx.HttpResult;
 import com.cjw.library.http.rx.RxDoOnSubscribe;
@@ -47,9 +48,17 @@ public class AddPersonPresenterImpl implements AddPersonPresenter {
     @Override
     public void getPhoto(int code) {
         if (code == TAKE_PHOTO) {
+            File cameraSavePath = new File(Environment.getExternalStorageDirectory(), IMAGE_FILE_NAME);
+            Uri uri;
             //启动相机
             Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");// 设置action
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory(), IMAGE_FILE_NAME)));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                uri = FileProvider.getUriForFile(context, "com.cpzx.facerecog.fileprovider", cameraSavePath);
+                intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+            } else {
+                uri = Uri.fromFile(cameraSavePath);
+            }
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
             addPersonView.takePhoto(intent, TAKE_PHOTO);
         } else {
             //打开相册

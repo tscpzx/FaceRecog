@@ -1,7 +1,6 @@
 package com.cpzx.facerecog.ui.activity;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -16,16 +15,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cpzx.facerecog.R;
 import com.cpzx.facerecog.adapter.WifiListAdapter;
@@ -33,36 +29,64 @@ import com.cpzx.facerecog.model.WifiBean;
 import com.cpzx.facerecog.util.CollectionUtils;
 import com.cpzx.facerecog.util.QRCodeUtil;
 import com.cpzx.facerecog.util.WifiUtil;
+import com.cpzx.facerecog.widget.NoScrollListView;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class WiFiConfigActivity extends BaseActivity implements View.OnClickListener {
-
-    private static final String TAG = "chenda";
+/**
+ * wifi配置
+ *
+ * @author xwr
+ * @date 2019/5/28
+ */
+public class WiFiConfigActivity extends BaseActivity {
+    private static final String TAG = WiFiConfigActivity.class.getSimpleName();
     private final static int PERMISSIONS_REQUEST_CODE_ACCESS_COARSE_LOCATION = 0;
-    private EditText wifiName_edit, wifiType_edit;
-    private EditText password_edit;
-    private Button search;
-    private Button connect;
-    private ListView listView;
-    private ImageView iv_qrcode;
+    @BindView(R.id.iv_go_back)
+    ImageView ivGoBack;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.tv_r)
+    TextView tvR;
+    @BindView(R.id.et_wifiname)
+    EditText etWifiname;
+    @BindView(R.id.et_wifistyle)
+    EditText etWifistyle;
+    @BindView(R.id.et_wifipassword)
+    EditText etWifipassword;
+    @BindView(R.id.btn_connect)
+    Button btnConnect;
+    @BindView(R.id.lv_wifi_list)
+    NoScrollListView lvWifiList;
+    @BindView(R.id.iv_code)
+    ImageView ivCode;
+
     private List<WifiBean> wifiBeanList = new ArrayList<>();
     private WifiListAdapter adapter;
     private WifiBean mWifiBean = new WifiBean();
     private WifiBroadcastReceiver wifiReceiver;//广播
     private boolean isConnection = false;
-    private TextView title;
-    private ImageView goback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wificonfig);
+        ButterKnife.bind(this);
+        init();
+    }
 
+    private void init() {
         initView();
+        setWifiManager();
+    }
+
+    private void setWifiManager() {
         WifiManager wifimanager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         if (!wifimanager.isWifiEnabled()) {
             wifiReceiver = new WifiBroadcastReceiver();
@@ -84,6 +108,25 @@ public class WiFiConfigActivity extends BaseActivity implements View.OnClickList
         if (wifiReceiver != null) {
             unregisterReceiver(wifiReceiver);
             wifiReceiver = null;
+        }
+    }
+
+    @OnClick({R.id.iv_go_back, R.id.tv_r, R.id.btn_connect})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.iv_go_back:
+                finish();
+                break;
+            case R.id.tv_r:
+                etWifiname.setText(null);
+                etWifipassword.setText(null);
+                etWifistyle.setText(null);
+                ivCode.setVisibility(View.GONE);
+                lvWifiList.setVisibility(View.VISIBLE);
+                break;
+            case R.id.btn_connect:
+                connectWifi();
+                break;
         }
     }
 
@@ -149,27 +192,17 @@ public class WiFiConfigActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initView() {
-        wifiName_edit = findViewById(R.id.et_wifiname);
-        wifiType_edit = findViewById(R.id.et_wifistyle);
-        password_edit = findViewById(R.id.et_wifipassword);
-        search = findViewById(R.id.search);
-        iv_qrcode = findViewById(R.id.txt);
-        listView = findViewById(R.id.listView);
-        connect = findViewById(R.id.connect);
-        title = findViewById(R.id.tv_title);
-        goback = findViewById(R.id.iv_go_back);
-        title.setText("网络配置");
+        tvTitle.setText("wifi配置");
+        tvR.setText("取消");
+        tvR.setVisibility(View.VISIBLE);
         adapter = new WifiListAdapter(this, wifiBeanList);
-        listView.setAdapter(adapter);
-        goback.setOnClickListener(this);
-        search.setOnClickListener(this);
-        connect.setOnClickListener(this);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lvWifiList.setAdapter(adapter);
+        lvWifiList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 mWifiBean = wifiBeanList.get(position);
-                wifiName_edit.setText(wifiBeanList.get(position).getWifiName());
-                wifiType_edit.setText(wifiBeanList.get(position).getCapabilities());
+                etWifiname.setText(wifiBeanList.get(position).getWifiName());
+                etWifistyle.setText(wifiBeanList.get(position).getCapabilities());
             }
         });
     }
@@ -200,24 +233,6 @@ public class WiFiConfigActivity extends BaseActivity implements View.OnClickList
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.search:
-                listView.setVisibility(View.VISIBLE);
-                iv_qrcode.setVisibility(View.GONE);
-                sortScaResult();
-                break;
-            case R.id.connect:
-                connectWifi();
-                break;
-            case R.id.iv_go_back:
-                finish();
-                break;
-            default:
-                break;
-        }
-    }
 
     /**
      * 获取wifi列表
@@ -246,28 +261,27 @@ public class WiFiConfigActivity extends BaseActivity implements View.OnClickList
     }
 
     private void connectWifi() {
-        if (wifiName_edit.getText().toString().equals("")) {
-            Toast.makeText(WiFiConfigActivity.this, "请输入WiFi名称", Toast.LENGTH_SHORT).show();
+        if (etWifiname.getText().toString().equals("")) {
+            showToast("请输入WiFi名称");
             return;
         }
-        if (wifiType_edit.getText().toString().equals("")) {
-            Toast.makeText(WiFiConfigActivity.this, "请输入WiFi类型", Toast.LENGTH_SHORT).show();
+        if (etWifistyle.getText().toString().equals("")) {
+            showToast("请输入wifi类型");
             return;
         }
-        mWifiBean.setWifiName(wifiName_edit.getText().toString());
-        mWifiBean.setPassword(wifiType_edit.getText().toString());
-        mWifiBean.setPassword(password_edit.getText().toString());
+        if (etWifipassword.getText().toString().equals("")) {
+            showToast("请输入密码");
+            return;
+        }
+        mWifiBean.setWifiName(etWifiname.getText().toString());
+        mWifiBean.setPassword(etWifipassword.getText().toString());
+        mWifiBean.setCapabilities(etWifistyle.getText().toString());
         String info = "WIFI:T:" + mWifiBean.getCapabilities() + ";P:\"" + mWifiBean.getPassword() + "\";S:" + mWifiBean.getWifiName() + ";";
-        listView.setVisibility(View.GONE);
+        lvWifiList.setVisibility(View.GONE);
         //更新UI
-        iv_qrcode.setVisibility(View.VISIBLE);
+        ivCode.setVisibility(View.VISIBLE);
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
-        Bitmap qr = QRCodeUtil.createQRImage(info, 1080, 1080, bmp);
-        iv_qrcode.setImageBitmap(qr);
-
-//        //连接方式
-//        WifiConfiguration wifiConfiguration = WifiUtil.createWifiConfig(wifiName_edit.getText().toString(), password_edit.getText().toString(), WifiUtil.getWifiCipher(mWifiBean.getCapabilities()));
-//        //连接网络
-//        WifiUtil.connectNet(wifiConfiguration, this);
+        Bitmap qr = QRCodeUtil.createQRImage(info, 800, 800, bmp);
+        ivCode.setImageBitmap(qr);
     }
 }
