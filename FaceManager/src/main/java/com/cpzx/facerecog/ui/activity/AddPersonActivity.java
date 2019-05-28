@@ -47,7 +47,6 @@ import static com.cpzx.facerecog.Constant.TAKE_PHOTO;
 
 public class AddPersonActivity extends BaseActivity implements AddPersonView {
     private final String TAG = AddPersonActivity.class.getSimpleName();
-    private Handler mHandler;
     @BindView(R.id.tv_title)
     TextView tvTitle;
     @BindView(R.id.et_name)
