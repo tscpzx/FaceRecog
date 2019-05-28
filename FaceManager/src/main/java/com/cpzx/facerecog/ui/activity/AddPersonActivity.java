@@ -148,6 +148,8 @@ public class AddPersonActivity extends BaseActivity implements AddPersonView {
             } else {
                 showGetPhotoDialog();
             }
+        } else {
+            showGetPhotoDialog();
         }
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
