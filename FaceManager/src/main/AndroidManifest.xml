@@ -25,7 +25,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
-        <activity android:name=".ui.activity.ConfigActivity" />
         <activity
             android:name=".ui.activity.AddPersonActivity"
             android:screenOrientation="portrait"
@@ -34,6 +33,12 @@
         <activity android:name=".ui.activity.RecordManagerActivity" />
         <activity android:name=".ui.activity.DeviceManagerActivity" />
         <activity android:name=".ui.activity.PersonManagerActivity" />
+        <activity android:name=".ui.activity.ConfigActivity" />
+        <activity android:name=".ui.activity.BaseActivity" />
+        <activity android:name=".ui.activity.LoginActivity" />
+        <activity android:name=".ui.activity.WiFiConfigActivity" />
+        <activity android:name=".ui.activity.SettingActivity" />
+
         <activity
             android:name=".ui.activity.EthernetActivity"
             android:screenOrientation="portrait"
@@ -45,9 +50,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.BaseActivity" />
-        <activity android:name=".ui.activity.LoginActivity" />
-        <activity android:name=".ui.activity.WiFiConfigActivity" /> <!-- 相机适配 -->
+
+        <!-- 相机适配 -->
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.cpzx.facerecog.fileprovider"

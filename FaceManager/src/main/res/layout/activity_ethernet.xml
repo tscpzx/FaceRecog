@@ -24,29 +24,31 @@
 
 
                 <!--网络设备-->
-                <RelativeLayout style="@style/linear_layout">
+                <LinearLayout style="@style/linear_layout">
 
                     <TextView
                         style="@style/txt_layout"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerVertical="true"
-                        android:text="网卡设备" />
+                        android:text="网卡设备:" />
 
-                    <Spinner
-                        android:id="@+id/sp_equipment"
-                        android:layout_width="wrap_content"
+                    <EditText
+                        android:id="@+id/et_equipment"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
                         android:layout_marginLeft="20dp"
-                        android:dropDownVerticalOffset="20dp"
-                        android:gravity="right|center_vertical" />
-                </RelativeLayout>
+                        android:layout_weight="1"
+                        android:background="@drawable/infor_input_edit"
+                        android:gravity="center_vertical|right"
+                        android:hint="@string/please_input"
+                        android:singleLine="true"
+                        android:textCursorDrawable="@drawable/edit_txt_cursor"
+                        android:textSize="@dimen/normal_txt" />
+                </LinearLayout>
                 <!--连接类型-->
                 <LinearLayout style="@style/linear_layout">
 
                     <TextView
                         style="@style/txt_layout"
-                        android:text="连接类型" />
+                        android:text="连接类型:" />
 
                     <RadioGroup
                         android:id="@+id/rg_ip_type"
@@ -78,7 +80,7 @@
 
                     <TextView
                         style="@style/txt_layout"
-                        android:text="ip地址" />
+                        android:text="IP地址:" />
 
                     <EditText
                         android:id="@+id/et_ip_address"
@@ -88,6 +90,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/infor_input_edit"
                         android:gravity="center_vertical|right"
+                        android:hint="@string/please_input"
                         android:singleLine="true"
                         android:textCursorDrawable="@drawable/edit_txt_cursor"
                         android:textSize="@dimen/normal_txt" />
@@ -97,7 +100,7 @@
 
                     <TextView
                         style="@style/txt_layout"
-                        android:text="子网掩码" />
+                        android:text="子网掩码:" />
 
                     <EditText
                         android:id="@+id/et_subnet_mask"
@@ -107,6 +110,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/infor_input_edit"
                         android:gravity="right|center_vertical"
+                        android:hint="@string/please_input"
                         android:singleLine="true"
                         android:textCursorDrawable="@drawable/edit_txt_cursor"
                         android:textSize="@dimen/normal_txt" />
@@ -116,7 +120,7 @@
 
                     <TextView
                         style="@style/txt_layout"
-                        android:text="DNS地址" />
+                        android:text="DNS地址:" />
 
                     <EditText
                         android:id="@+id/et_dns_address"
@@ -126,6 +130,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/infor_input_edit"
                         android:gravity="right|center_vertical"
+                        android:hint="@string/please_input"
                         android:singleLine="true"
                         android:textCursorDrawable="@drawable/edit_txt_cursor"
                         android:textSize="@dimen/normal_txt" />
@@ -135,7 +140,7 @@
 
                     <TextView
                         style="@style/txt_layout"
-                        android:text="网关地址" />
+                        android:text="网关地址:" />
 
                     <EditText
                         android:id="@+id/et_gate_address"
@@ -145,6 +150,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/infor_input_edit"
                         android:gravity="right|center_vertical"
+                        android:hint="@string/please_input"
                         android:singleLine="true"
                         android:textCursorDrawable="@drawable/edit_txt_cursor"
                         android:textSize="@dimen/normal_txt" />

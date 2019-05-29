@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 import com.cpzx.facerecog.R;
 import com.cpzx.facerecog.adapter.FunctionGridAdapter;
 import com.cpzx.facerecog.util.SharedPreferenceUtil;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * @author xwr
@@ -18,6 +21,8 @@ import butterknife.BindView;
 public class MainActivity extends BaseActivity {
     @BindView(R.id.grid_view)
     GridView mGridView;
+    @BindView(R.id.iv_setting)
+    ImageView ivSetting;
     private FunctionGridAdapter mFunctionGridAdapter;
     private SharedPreferenceUtil sharedPreferenceUtil;
 
@@ -25,6 +30,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         init();
 
     }
@@ -74,5 +80,18 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         initData();
+    }
+
+    @OnClick(R.id.iv_setting)
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.iv_setting:
+                goActivity(SettingActivity.class);
+                break;
+            default:
+                break;
+        }
+
+
     }
 }

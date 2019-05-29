@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cpzx.facerecog.R;
@@ -36,7 +37,6 @@ import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -66,6 +66,8 @@ public class WiFiConfigActivity extends BaseActivity {
     NoScrollListView lvWifiList;
     @BindView(R.id.iv_code)
     ImageView ivCode;
+    @BindView(R.id.ll_wifi_tip)
+    LinearLayout llWifiTip;
 
     private List<WifiBean> wifiBeanList = new ArrayList<>();
     private WifiListAdapter adapter;
@@ -77,7 +79,6 @@ public class WiFiConfigActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wificonfig);
-        ButterKnife.bind(this);
         init();
     }
 
@@ -122,6 +123,7 @@ public class WiFiConfigActivity extends BaseActivity {
                 etWifipassword.setText(null);
                 etWifistyle.setText(null);
                 ivCode.setVisibility(View.GONE);
+                llWifiTip.setVisibility(View.VISIBLE);
                 lvWifiList.setVisibility(View.VISIBLE);
                 break;
             case R.id.btn_connect:
@@ -276,9 +278,9 @@ public class WiFiConfigActivity extends BaseActivity {
         mWifiBean.setWifiName(etWifiname.getText().toString());
         mWifiBean.setPassword(etWifipassword.getText().toString());
         mWifiBean.setCapabilities(etWifistyle.getText().toString());
-        String info = "WIFI:T:" + mWifiBean.getCapabilities() + ";P:\"" + mWifiBean.getPassword() + "\";S:" + mWifiBean.getWifiName() + ";";
+        String info = "wifi:T:" + mWifiBean.getCapabilities() + ";P:\"" + mWifiBean.getPassword() + "\";S:" + mWifiBean.getWifiName() + ";";
+        llWifiTip.setVisibility(View.GONE);
         lvWifiList.setVisibility(View.GONE);
-        //更新UI
         ivCode.setVisibility(View.VISIBLE);
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
         Bitmap qr = QRCodeUtil.createQRImage(info, 800, 800, bmp);

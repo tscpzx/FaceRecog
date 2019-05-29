@@ -23,7 +23,8 @@
                 android:ellipsize="end"
                 android:hint="@string/input_tip"
                 android:paddingLeft="@dimen/m_p"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textCursorDrawable="@drawable/edit_txt_cursor" />
 
             <View
                 android:layout_width="match_parent"
@@ -38,7 +39,8 @@
                 android:ellipsize="end"
                 android:hint="@string/input_type"
                 android:paddingLeft="@dimen/m_p"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textCursorDrawable="@drawable/edit_txt_cursor" />
 
             <View
                 android:layout_width="match_parent"
@@ -53,7 +55,8 @@
                 android:ellipsize="end"
                 android:hint="@string/input_password"
                 android:paddingLeft="@dimen/m_p"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textCursorDrawable="@drawable/edit_txt_cursor" />
 
             <View
                 android:layout_width="match_parent"
@@ -68,6 +71,28 @@
                 android:text="@string/buildQr"
                 android:textColor="#ffffff" />
 
+            <LinearLayout
+                android:id="@+id/ll_wifi_tip"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/m_p">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:src="@mipmap/wifi" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/wifi_list"
+                    android:textColor="@color/colorLightBlack"
+                    android:textSize="@dimen/normal_txt" />
+            </LinearLayout>
 
             <com.cpzx.facerecog.widget.NoScrollListView
                 android:id="@+id/lv_wifi_list"

@@ -8,16 +8,89 @@
 
     <include layout="@layout/common_title" />
 
-    <Button
-        android:id="@+id/btn_ethrnet"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="以太网" />
+    <com.cpzx.facerecog.widget.MyScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_ethernet"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="@dimen/m_p"
+                android:background="@drawable/item_shape"
+                android:elevation="2dp"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/m_p"
+                android:paddingRight="@dimen/m_p">
+
+                <ImageView
+                    android:id="@+id/iv_ether"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/ethernet" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/iv_ether"
+                    android:text="以太网配置"
+                    android:textColor="@color/colorLightBlack"
+                    android:textSize="@dimen/bigger_txt" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/enter" />
+            </RelativeLayout>
 
 
-    <Button
-        android:id="@+id/btn_wifi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="wifi" />
+            <RelativeLayout
+                android:id="@+id/rl_wifi"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="@dimen/m_p"
+                android:background="@drawable/item_shape"
+                android:elevation="2dp"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/m_p"
+                android:paddingRight="@dimen/m_p">
+
+                <ImageView
+                    android:id="@+id/iv_wifi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/wifi_config" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/iv_wifi"
+                    android:text="WIFI配置"
+                    android:textColor="@color/colorLightBlack"
+                    android:textSize="@dimen/bigger_txt" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/enter" />
+            </RelativeLayout>
+        </LinearLayout>
+    </com.cpzx.facerecog.widget.MyScrollView>
 </LinearLayout>

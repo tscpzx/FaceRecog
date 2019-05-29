@@ -30,8 +30,8 @@ public class ImageUtil {
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, newOpts);
         int w = newOpts.outWidth;
         int h = newOpts.outHeight;
-        float hh = 300f;
-        float ww = 300f;
+        float hh = 800f;
+        float ww = 400f;
         int be = 1;
         if (w > h && w > ww) {
             be = (int) (newOpts.outWidth / ww);

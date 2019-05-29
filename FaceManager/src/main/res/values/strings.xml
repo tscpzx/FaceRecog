@@ -12,10 +12,14 @@
     <string name="input_type">请输入wifi加密类型(WPA、WEP、OPEN)</string>
     <string name="search">wifi扫描</string>
     <string name="input_password">请输入wifi密码</string>
-    <string name="wifi_list">wifi列表</string>
+    <string name="wifi_list">WIFI列表</string>
     <string name="buildQr">生成二维码</string>
     <string name="wifiConfig">wifi配置</string>
     <string name="ethConfig">以太网配置</string>
+    <string name="please_input">请输入</string>
+    <string name="logout">退出当前账号</string>
+
+
     <dimen name="title_size">24dp</dimen>
     <dimen name="bigger_txt">20sp</dimen>
     <dimen name="normal_txt">18sp</dimen>
