@@ -12,6 +12,7 @@ import com.cjw.library.http.rx.HttpResult;
 import com.cjw.library.http.rx.RxDoOnSubscribe;
 import com.cjw.library.http.rx.RxSchedulers;
 import com.cjw.library.http.rx.RxTrHttpMethod;
+import com.cpzx.facerecog.Constant;
 import com.cpzx.facerecog.HttpService;
 import com.cpzx.facerecog.model.Device;
 import com.cpzx.facerecog.model.PageList;
@@ -83,7 +84,7 @@ public class AddPersonPresenterImpl implements AddPersonPresenter {
         Map<String, String> map = new HashMap<>();
         RxTrHttpMethod.getInstance()
                 .createService(HttpService.class)
-                .deviceList(sharedPreferenceUtil.getString("token"), map)
+                .deviceList(Constant.CURRENT_USER.getAccess_cpfr_token(), map)
                 .compose(RxSchedulers.<HttpResult<PageList<Device>>>defaultSchedulers())
                 .doOnSubscribe(new RxDoOnSubscribe(context))
                 .subscribe(new HttpResultUtil<PageList<Device>>(context) {

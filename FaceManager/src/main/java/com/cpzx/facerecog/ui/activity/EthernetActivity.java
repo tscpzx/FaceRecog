@@ -3,6 +3,7 @@ package com.cpzx.facerecog.ui.activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -89,10 +90,26 @@ public class EthernetActivity extends BaseActivity {
     }
 
     private void verify() {
+        String name = etEquipment.getText().toString();
+        String dns = etDnsAddress.getText().toString();
+        String gate = etGateAddress.getText().toString();
+        String mask = etSubnetMask.getText().toString();
         String ip = etIpAddress.getText().toString();
-        if (NetUtil.isIP(ip) || ip.equals("")) {
+        if (TextUtils.isEmpty(ip)) {
+            showToast("ip地址不能为空");
+            return;
+        }
+        if (TextUtils.isEmpty(dns)) {
+            showToast("dns地址不能为空");
+            return;
+        }
+        if (TextUtils.isEmpty(gate)) {
+            showToast("网关地址不能为空");
+            return;
+        }
+        if (NetUtil.isIP(ip)) {
             Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
-            Bitmap qr = QRCodeUtil.createQRImage("网卡设备：" + ";ip地址：" + ip + ";子网掩码：" + etSubnetMask.getText().toString() + ";DNS地址：" + etDnsAddress.getText().toString() + ";网关地址：" + etGateAddress.getText().toString(), 800, 800, bmp);
+            Bitmap qr = QRCodeUtil.createQRImage("网卡设备：" + name + ";ip地址：" + ip + ";子网掩码：" + mask + ";DNS地址：" + dns + ";网关地址：" + gate, 800, 800, bmp);
             ivCode.setImageBitmap(qr);
             ivCode.setVisibility(View.VISIBLE);
         } else {

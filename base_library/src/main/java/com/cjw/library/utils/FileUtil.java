@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.io.Closeable;
 import java.io.File;
@@ -33,6 +35,9 @@ public class FileUtil {
 			else if (file.isDirectory()) deleteDirWithFile(path); // 递规的方式删除文件夹
 		}
 	}
+
+
+
 
 	public static void closeSilently(Closeable c) {
 		if (c == null) return;

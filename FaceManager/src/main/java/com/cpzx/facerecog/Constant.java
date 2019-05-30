@@ -11,4 +11,6 @@ public class Constant {
     public static final int CHOOSE_PHOTO = 0x01;
     public static final int CROP_PHOTO = 0x03;
     public static final String IMAGE_FILE_NAME = "image.jpg";
+    public static final String IMAGE_FILE_LOCATION = "temp.jpg";
+    public static User CURRENT_USER = new User();
 }

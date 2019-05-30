@@ -1,6 +1,5 @@
 package com.cpzx.facerecog.model;
 
-import android.app.Activity;
 
 /**
  * created by xwr on 2019/5/9

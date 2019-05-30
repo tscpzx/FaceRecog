@@ -1,7 +1,6 @@
 package com.cpzx.facerecog.ui.activity;
 
 import android.Manifest;
-import android.content.ClipData;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -9,7 +8,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -22,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.cpzx.facerecog.Constant;
 import com.cpzx.facerecog.R;
 import com.cpzx.facerecog.model.Device;
 import com.cpzx.facerecog.model.Person;
@@ -42,7 +41,6 @@ import butterknife.OnClick;
 
 import static com.cpzx.facerecog.Constant.CHOOSE_PHOTO;
 import static com.cpzx.facerecog.Constant.CROP_PHOTO;
-import static com.cpzx.facerecog.Constant.IMAGE_FILE_NAME;
 import static com.cpzx.facerecog.Constant.TAKE_PHOTO;
 
 public class AddPersonActivity extends BaseActivity implements AddPersonView {
@@ -68,6 +66,7 @@ public class AddPersonActivity extends BaseActivity implements AddPersonView {
     private String chooseDeviceIds = "";
     private byte[] headBytes;
     private Uri uritempFile;
+    private File tempFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,9 +83,15 @@ public class AddPersonActivity extends BaseActivity implements AddPersonView {
     private void initData() {
         tvTitle.setText("添加用户");
         mAddPersonPresenter = new AddPersonPresenterImpl(this, this);
-        mAddPersonPresenter.getDeviceList();
+
+
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mAddPersonPresenter.getDeviceList();
+    }
 
     @OnClick({R.id.ll_choose_pic, R.id.iv_go_back, R.id.btn_add, R.id.iv_header, R.id.tv_device_num})
     public void onClick(View view) {
@@ -130,10 +135,13 @@ public class AddPersonActivity extends BaseActivity implements AddPersonView {
                 @Override
                 public void getDevices(List<Integer> devicesIds) {
                     List<Integer> list = devicesIds;
-                    tvDeviceNum.setText("已选择：" + list.size() + "台设备");
+                    if (list.size() == 0) {
+                        tvDeviceNum.setText("请选择");
+                    } else {
+                        tvDeviceNum.setText("已选择：" + list.size() + "台设备");
+                    }
                     String ids = StringUtil.listToString(list, ',');
                     chooseDeviceIds = ids;
-                    Log.d("test", chooseDeviceIds);
                 }
             });
             listDialog.show();
@@ -187,6 +195,7 @@ public class AddPersonActivity extends BaseActivity implements AddPersonView {
 
     @Override
     public void onAddSuccess() {
+
         showToast("添加成功");
         finish();
         goActivity(AddPersonActivity.class);
@@ -209,14 +218,13 @@ public class AddPersonActivity extends BaseActivity implements AddPersonView {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CHOOSE_PHOTO) {
             if (data != null) {
                 cropPhoto(data.getData());
             }
         } else if (requestCode == TAKE_PHOTO) {
             if (resultCode == RESULT_OK) {
-                File file = new File(Environment.getExternalStorageDirectory(), IMAGE_FILE_NAME);
+                File file = new File(Environment.getExternalStorageDirectory(), Constant.IMAGE_FILE_NAME);
                 cropPhoto(Uri.fromFile(file));
             }
         } else if (requestCode == CROP_PHOTO) {
@@ -224,17 +232,24 @@ public class AddPersonActivity extends BaseActivity implements AddPersonView {
                 setImage(data);
             }
         }
+        super.onActivityResult(requestCode, resultCode, data);
+
     }
 
     private void setImage(Intent intent) {
         Bundle extra = intent.getExtras();
         if (extra != null) {
-            Bitmap bitmap = extra.getParcelable("data");
-            byte[] bytes = ImageUtil.BitmapToBytes(bitmap, 100);
-            ivHeader.setImageBitmap(bitmap);
-            ivHeader.setVisibility(View.VISIBLE);
-            llChoosePicture.setVisibility(View.GONE);
-            headBytes = ImageUtil.compressImageByBytes(bytes);
+            if (uritempFile != null) {
+                Bitmap bitmap = ImageUtil.decodeUriAsBitmap(this, uritempFile);
+                byte[] bytes = ImageUtil.BitmapToBytes(bitmap, 100);
+                ivHeader.setImageBitmap(bitmap);
+                //删除临时文件
+                tempFile.delete();
+                ivHeader.setVisibility(View.VISIBLE);
+                llChoosePicture.setVisibility(View.GONE);
+                headBytes = ImageUtil.compressImageByBytes(bytes);
+                headBytes = bytes;
+            }
         } else {
             showToast("照片获取失败,请稍后再试");
         }
@@ -248,19 +263,20 @@ public class AddPersonActivity extends BaseActivity implements AddPersonView {
         intent.putExtra("crop", true);
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
-        intent.putExtra("outputX", 100);
-        intent.putExtra("outputY", 100);
+        intent.putExtra("outputX", 300);
+        intent.putExtra("outputY", 300);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             //开启临时权限
             intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            //重点:针对7.0以上的操作
-            intent.setClipData(ClipData.newRawUri(MediaStore.EXTRA_OUTPUT, uri));
-            uritempFile = uri;
-        } else {
-            uritempFile = Uri.parse("file://" + "/" + Environment.getExternalStorageDirectory().getPath() + "/" + "small.jpg");
+//            //重点:针对7.0以上的操作
+//            intent.setClipData(ClipData.newRawUri(MediaStore.EXTRA_OUTPUT, uri));
         }
+        tempFile = new File(Environment.getExternalStorageDirectory(), Constant.IMAGE_FILE_LOCATION);
+        uritempFile = Uri.fromFile(tempFile);
+        //不返回bitmap
+        intent.putExtra("return-data", false);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uritempFile);
-        intent.putExtra("return-data", true);
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());// 图片格式
         startActivityForResult(intent, CROP_PHOTO);
     }

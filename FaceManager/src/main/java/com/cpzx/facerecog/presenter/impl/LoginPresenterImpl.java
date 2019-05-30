@@ -1,10 +1,8 @@
 package com.cpzx.facerecog.presenter.impl;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.cjw.library.http.rx.HttpResult;
-import com.cjw.library.http.rx.HttpResultSubscriber;
 import com.cjw.library.http.rx.RxDoOnSubscribe;
 import com.cjw.library.http.rx.RxSchedulers;
 import com.cjw.library.http.rx.RxTrHttpMethod;
@@ -48,6 +46,7 @@ public class LoginPresenterImpl implements LoginPresenter {
                 .subscribe(new HttpResultUtil<User>(context) {
                                @Override
                                public void _onSuccess(User result) {
+                                   Constant.CURRENT_USER = result;
                                    sharedPreferences.putValues(new SharedPreferenceUtil.ContentValue("adminId", result.getAdmin_id()));
                                    sharedPreferences.putValues(new SharedPreferenceUtil.ContentValue("token", result.getAccess_cpfr_token()));
                                    isLogin = true;
