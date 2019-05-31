@@ -58,7 +58,7 @@ public class ListDialog extends Dialog {
         Display d = m.getDefaultDisplay();
         WindowManager.LayoutParams wl = window.getAttributes();
         wl.width = (int) (d.getWidth() * 0.8);
-        wl.height = (int) (d.getHeight() * 0.4);
+        wl.height = (int) (d.getHeight() * 0.6);
         wl.gravity = Gravity.CENTER;
         window.setAttributes(wl);
         adapter = new DeviceListAdapter(context, list);

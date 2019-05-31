@@ -6,6 +6,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.cpzx.facerecog.Constant;
 import com.cpzx.facerecog.R;
 import com.cpzx.facerecog.adapter.FunctionGridAdapter;
 import com.cpzx.facerecog.util.SharedPreferenceUtil;
@@ -54,6 +55,7 @@ public class MainActivity extends BaseActivity {
                         showToast("请先登录~");
                         goActivity(LoginActivity.class);
                     } else {
+                        Constant.CURRENT_USER.setAccess_cpfr_token(sharedPreferenceUtil.getString("token"));
                         switch (position) {
                             case 0:
                                 goActivity(DeviceManagerActivity.class);
