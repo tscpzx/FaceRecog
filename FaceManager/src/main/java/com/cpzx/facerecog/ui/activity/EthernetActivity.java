@@ -49,8 +49,6 @@ public class EthernetActivity extends BaseActivity {
     Button btnConfig;
     @BindView(R.id.code)
     ImageView ivCode;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

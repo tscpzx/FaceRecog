@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.cpzx.facerecog.R;
 import com.cpzx.facerecog.util.SharedPreferenceUtil;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -21,23 +24,32 @@ public class SettingActivity extends BaseActivity {
     @BindView(R.id.btn_logout)
     Button btnLogout;
     SharedPreferenceUtil sharedPreferenceUtil;
+    @BindView(R.id.iv_go_back)
+    ImageView ivGoBack;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        ButterKnife.bind(this);
         init();
     }
 
     private void init() {
+        tvTitle.setText("设置");
         sharedPreferenceUtil = SharedPreferenceUtil.getInstance(this);
     }
 
-    @OnClick(R.id.btn_logout)
+    @OnClick({R.id.btn_logout,R.id.iv_go_back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_logout:
                 showLogoutDialog();
+                break;
+            case R.id.iv_go_back:
+                finish();
                 break;
             default:
                 break;
@@ -68,4 +80,5 @@ public class SettingActivity extends BaseActivity {
         //参数都设置完成了，创建并显示出来
         builder.create().show();
     }
+
 }
