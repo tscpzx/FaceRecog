@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.cpzx.facerecog.R;
 import com.cpzx.facerecog.util.NetUtil;
 import com.cpzx.facerecog.util.QRCodeUtil;
+import com.cpzx.facerecog.util.ScreenSettingUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -112,6 +113,9 @@ public class EthernetActivity extends BaseActivity {
             Bitmap qr = QRCodeUtil.createQRImage("网卡设备：" + name + ";ip地址：" + ip + ";子网掩码：" + mask + ";DNS地址：" + dns + ";网关地址：" + gate, 800, 800, bmp);
             ivCode.setImageBitmap(qr);
             ivCode.setVisibility(View.VISIBLE);
+            if (ScreenSettingUtil.getScreenBrightnes(this) <= 200) {
+                ScreenSettingUtil.setScreenBrightness(this, 200);
+            }
         } else {
             Toast.makeText(EthernetActivity.this, "ip格式不正确", Toast.LENGTH_SHORT).show();
         }

@@ -195,7 +195,6 @@ public class AddPersonActivity extends BaseActivity implements AddPersonView {
 
     @Override
     public void onAddSuccess() {
-
         showToast("添加成功");
         finish();
         goActivity(AddPersonActivity.class);

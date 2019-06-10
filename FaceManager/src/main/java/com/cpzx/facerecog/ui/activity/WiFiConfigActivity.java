@@ -29,6 +29,7 @@ import com.cpzx.facerecog.adapter.WifiListAdapter;
 import com.cpzx.facerecog.model.WifiBean;
 import com.cpzx.facerecog.util.CollectionUtils;
 import com.cpzx.facerecog.util.QRCodeUtil;
+import com.cpzx.facerecog.util.ScreenSettingUtil;
 import com.cpzx.facerecog.util.WifiUtil;
 import com.cpzx.facerecog.widget.NoScrollListView;
 
@@ -285,5 +286,8 @@ public class WiFiConfigActivity extends BaseActivity {
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
         Bitmap qr = QRCodeUtil.createQRImage(info, 800, 800, bmp);
         ivCode.setImageBitmap(qr);
+        if (ScreenSettingUtil.getScreenBrightnes(this) <= 200) {
+            ScreenSettingUtil.setScreenBrightness(this, 200);
+        }
     }
 }
