@@ -11,6 +11,9 @@ import com.cpzx.facerecog.model.WifiBean;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class WifiListAdapter extends BaseAdapter {
     private Context context;
@@ -40,11 +43,8 @@ public class WifiListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = View.inflate(context, R.layout.wifi_item, null);
-            viewHolder = new ViewHolder();
-            viewHolder.name = convertView.findViewById(R.id.name);
-            viewHolder.capability = convertView.findViewById(R.id.capability);
-
+            convertView = View.inflate(context, R.layout.wifi_list_item, null);
+            viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -55,7 +55,13 @@ public class WifiListAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
+        @BindView(R.id.name)
         TextView name;
+        @BindView(R.id.capability)
         TextView capability;
+
+        ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 }

@@ -5,5 +5,5 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.RecordManagerActivity">
 
-    <include layout="@layout/common_title" />
+    <include layout="@layout/common_title_include" />
 </LinearLayout>

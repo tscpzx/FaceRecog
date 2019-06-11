@@ -59,7 +59,7 @@ public class FunctionGridAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
-            convertView= LayoutInflater.from(context).inflate(R.layout.grid_item, null);
+            convertView= LayoutInflater.from(context).inflate(R.layout.function_grid_item, null);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         } else {

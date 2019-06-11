@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context=".ui.activity.PersonManagerActivity">
 
-    <include layout="@layout/common_title" />
+    <include layout="@layout/common_title_include" />
 
     <Button
         android:id="@+id/add_person"

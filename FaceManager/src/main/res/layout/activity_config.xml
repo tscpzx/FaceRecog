@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context=".ui.activity.ConfigActivity">
 
-    <include layout="@layout/common_title" />
+    <include layout="@layout/common_title_include" />
 
     <com.cpzx.facerecog.widget.MyScrollView
         android:layout_width="match_parent"
